@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clariosity — Clarity from your peers in L&amp;D</title>
+  <meta name="description" content="A peer-driven platform where L&D professionals share what their function is really like — budgets, tools, vendors, priorities, and culture — so others can make better decisions." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Crect width='56' height='56' rx='12' fill='%230F4C4F'/%3E%3Cg fill='%23FAF8F3'%3E%3Ccircle cx='28' cy='28' r='6.5'/%3E%3Ccircle cx='28' cy='12' r='4'/%3E%3Ccircle cx='41.86' cy='20' r='4'/%3E%3Ccircle cx='41.86' cy='36' r='4'/%3E%3Ccircle cx='28' cy='44' r='4'/%3E%3Ccircle cx='14.14' cy='36' r='4'/%3E%3Ccircle cx='14.14' cy='20' r='4'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #FAF8F3;
+      --surface: #FFFFFF;
+      --text: #0F172A;
+      --text-muted: #475569;
+      --text-faint: #94A3B8;
+      --accent: #0F4C4F;
+      --accent-hover: #134E4A;
+      --accent-soft: #E6F0EF;
+      --accent-tint: #F2F8F7;
+      --border: #E7E5E0;
+      --border-strong: #D6D3CC;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --max-width: 1180px;
+      --content-width: 720px;
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.06);
+      --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wordmark { display: inline-flex; align-items: center; gap: 10px; font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 22px; letter-spacing: -0.01em; color: var(--text); line-height: 1; }
+    .wordmark .accent { color: var(--accent); }
+    .wordmark .wordmark-mark { flex: 0 0 auto; display: block; }
+    nav.site-nav { padding: 22px 0; position: sticky; top: 0; background: rgba(250, 248, 243, 0.85); backdrop-filter: saturate(180%) blur(8px); -webkit-backdrop-filter: saturate(180%) blur(8px); z-index: 50; border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
+    nav.site-nav.scrolled { border-color: var(--border); }
+    nav.site-nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .nav-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--text); padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--surface); transition: all 0.15s ease; }
+    .nav-cta:hover { background: var(--accent); color: #fff; border-color: var(--accent); text-decoration: none; }
+    section.hero { padding: 56px 0 72px; }
+    .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
+    @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
+    .eyebrow { display: inline-block; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); padding: 6px 12px; background: var(--accent-soft); border-radius: 999px; margin-bottom: 24px; }
+    h1.hero-title { font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(36px, 5.4vw, 64px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 20px; max-width: 14ch; }
+    h1.hero-title em { font-style: italic; color: var(--accent); }
+    p.hero-sub { font-size: 19px; line-height: 1.55; color: var(--text-muted); max-width: 50ch; margin: 0 0 32px; }
+    .preview-wrap { position: relative; perspective: 1400px; }
+    .preview-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 28px; transform: rotate(0.4deg); transition: transform 0.6s ease; position: relative; overflow: hidden; }
+    .preview-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent) 0%, #4A8C8A 100%); }
+    .preview-wrap:hover .preview-card { transform: rotate(0deg) translateY(-2px); }
+    .preview-card .pc-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
+    .preview-card .pc-co { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 19px; letter-spacing: -0.01em; color: var(--text); margin: 0 0 4px; }
+    .preview-card .pc-meta { font-size: 13px; color: var(--text-muted); }
+    .preview-card .pc-badge { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); background: var(--accent-soft); padding: 4px 9px; border-radius: 999px; flex: 0 0 auto; }
+    .preview-card .pc-section { margin-bottom: 16px; }
+    .preview-card .pc-section:last-child { margin-bottom: 0; }
+    .preview-card .pc-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin: 0 0 8px; }
+    .preview-card .pc-stat-row { display: flex; justify-content: space-between; align-items: baseline; padding: 6px 0; font-size: 14px; }
+    .preview-card .pc-stat-row span:first-child { color: var(--text-muted); }
+    .preview-card .pc-stat-row span:last-child { color: var(--text); font-weight: 500; }
+    .preview-card .pc-priorities { display: flex; flex-wrap: wrap; gap: 6px; }
+    .preview-card .pc-tag { font-size: 12.5px; padding: 4px 10px; border-radius: 999px; background: var(--accent-tint); color: var(--accent); border: 1px solid var(--accent-soft); }
+    .preview-card .pc-vendor-row { display: flex; justify-content: space-between; align-items: center; padding: 7px 0; font-size: 13.5px; border-top: 1px dashed var(--border); }
+    .preview-card .pc-vendor-row:first-of-type { border-top: none; padding-top: 0; }
+    .preview-card .pc-vendor-name { color: var(--text); }
+    .preview-card .pc-stars { font-size: 12px; color: var(--accent); letter-spacing: 1px; }
+    .signup-form { display: flex; gap: 8px; max-width: 460px; flex-wrap: wrap; }
+    .signup-form input[type="email"] { flex: 1; min-width: 220px; padding: 14px 16px; font-family: inherit; font-size: 16px; color: var(--text); background: var(--surface); border: 1px solid var(--border-strong); border-radius: 10px; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
+    .signup-form input[type="email"]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .btn-primary { padding: 14px 22px; font-family: inherit; font-size: 16px; font-weight: 500; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: 10px; cursor: pointer; transition: background 0.15s ease, transform 0.05s ease; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:active { transform: translateY(1px); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-meta { margin-top: 14px; font-size: 14px; color: var(--text-faint); }
+    .signup-success { display: none; margin-top: 16px; padding: 16px 20px; background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 10px; color: var(--accent); font-weight: 500; }
+    .signup-success.visible { display: block; }
+    .signup-error { display: none; margin-top: 16px; padding: 14px 18px; background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 10px; color: #B91C1C; font-weight: 500; font-size: 14.5px; }
+    .signup-error.visible { display: block; }
+    section { padding: 64px 0; }
+    section.alt { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .section-eyebrow { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 14px; display: inline-block; }
+    h2.section-title { font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 20px; max-width: 22ch; }
+    p.section-lede { font-size: 18px; color: var(--text-muted); line-height: 1.6; max-width: 60ch; margin: 0 0 40px; }
+    .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+    @media (max-width: 800px) { .problem-grid { grid-template-columns: 1fr; gap: 32px; } }
+    .problem-points { display: flex; flex-direction: column; gap: 22px; }
+    .problem-point { padding-left: 18px; border-left: 2px solid var(--border-strong); }
+    .problem-point strong { display: block; color: var(--text); margin-bottom: 4px; font-weight: 600; }
+    .problem-point span { color: var(--text-muted); font-size: 16px; }
+    .hooks-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 880px) { .hooks-grid { grid-template-columns: 1fr; } }
+    .hook-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+    .hook-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+    .hook-num { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 16px; margin-bottom: 18px; }
+    .hook-card h3 { font-family: 'Source Serif 4', serif; font-weight: 500; font-size: 22px; letter-spacing: -0.01em; line-height: 1.25; margin: 0 0 10px; }
+    .hook-card p { color: var(--text-muted); font-size: 15.5px; line-height: 1.55; margin: 0; }
+    .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; counter-reset: step; }
+    @media (max-width: 880px) { .how-grid { grid-template-columns: 1fr; } }
+    .how-step { padding: 24px 24px 24px 28px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); position: relative; counter-increment: step; }
+    .how-step::before { content: counter(step, decimal-leading-zero); font-family: 'Source Serif 4', serif; font-weight: 500; font-size: 26px; color: var(--accent); display: block; margin-bottom: 10px; letter-spacing: -0.02em; }
+    .how-step h4 { font-family: 'Source Serif 4', serif; font-weight: 500; font-size: 19px; margin: 0 0 6px; letter-spacing: -0.01em; }
+    .how-step p { color: var(--text-muted); font-size: 15.5px; margin: 0; }
+    .audience-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 940px; margin: 0 auto; }
+    @media (max-width: 800px) { .audience-grid { grid-template-columns: repeat(2, 1fr); } }
+    .audience-pill { text-align: center; padding: 22px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); font-weight: 500; font-size: 16px; color: var(--text); }
+    .audience-pill em { display: block; margin-top: 6px; font-style: normal; color: var(--text-muted); font-weight: 400; font-size: 13.5px; }
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--border); }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item summary { list-style: none; cursor: pointer; padding: 22px 4px; font-family: 'Source Serif 4', serif; font-weight: 500; font-size: 19px; letter-spacing: -0.01em; color: var(--text); display: flex; align-items: center; justify-content: space-between; gap: 16px; transition: color 0.15s ease; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary:hover { color: var(--accent); }
+    .faq-item summary::after { content: '+'; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 22px; color: var(--accent); transition: transform 0.2s ease; flex: 0 0 auto; width: 22px; text-align: center; }
+    .faq-item[open] summary::after { content: '−'; }
+    .faq-answer { padding: 0 4px 22px; color: var(--text-muted); font-size: 16px; line-height: 1.6; max-width: 64ch; }
+    section.final-cta { padding: 72px 0 96px; background: var(--surface); border-top: 1px solid var(--border); }
+    .final-card { max-width: 720px; margin: 0 auto; padding: 40px; background: var(--bg); border: 1px solid var(--border-strong); border-radius: var(--radius-lg); text-align: left; }
+    .final-card h2 { font-family: 'Source Serif 4', serif; font-weight: 500; font-size: clamp(26px, 3.2vw, 36px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 14px; }
+    .final-card p { color: var(--text-muted); font-size: 17px; margin: 0 0 28px; }
+    .filter-question { margin: 24px 0 4px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .filter-question label.q { display: block; font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+    .filter-options { display: grid; grid-template-columns: 1fr; gap: 8px; }
+    .filter-options label { display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; cursor: pointer; font-size: 14.5px; color: var(--text); transition: border-color 0.15s ease, background 0.15s ease; }
+    .filter-options label:hover { border-color: var(--border-strong); }
+    .filter-options input[type="radio"] { margin: 3px 0 0; accent-color: var(--accent); }
+    .filter-options label:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); background: var(--bg); }
+    footer .container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    footer .wordmark { font-size: 18px; }
+    .foot-meta { color: var(--text-faint); font-size: 14px; }
+    .foot-link { color: var(--text-muted); font-size: 14px; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .fade-up { animation: fadeUp 0.6s ease both; }
+    .fade-up.delay-1 { animation-delay: 0.1s; }
+    .fade-up.delay-2 { animation-delay: 0.2s; }
+    .fade-up.delay-3 { animation-delay: 0.3s; }
+    .fade-up.delay-4 { animation-delay: 0.4s; }
+    @keyframes floatCard { 0%, 100% { transform: rotate(0.4deg) translateY(0); } 50% { transform: rotate(0.4deg) translateY(-4px); } }
+    .preview-card { animation: floatCard 5s ease-in-out infinite; }
+  </style>
+</head>
+<body>
+  <nav class="site-nav" id="nav">
+    <div class="container">
+      <div class="wordmark">
+        <svg class="wordmark-mark" width="22" height="22" viewBox="0 0 56 56" fill="#0F4C4F" aria-hidden="true">
+          <circle cx="28" cy="28" r="7"/>
+          <circle cx="28" cy="12" r="4.5"/>
+          <circle cx="41.86" cy="20" r="4.5"/>
+          <circle cx="41.86" cy="36" r="4.5"/>
+          <circle cx="28" cy="44" r="4.5"/>
+          <circle cx="14.14" cy="36" r="4.5"/>
+          <circle cx="14.14" cy="20" r="4.5"/>
+        </svg>
+        <span>Clari<span class="accent">osity</span></span>
+      </div>
+      <a href="#join" class="nav-cta">Join the waitlist</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="container">
+      <div class="hero-grid">
+        <div>
+          <span class="eyebrow fade-up">Coming soon · For L&amp;D professionals</span>
+          <h1 class="hero-title fade-up delay-1">Clarity from your peers in <em>L&amp;D</em>.</h1>
+          <p class="hero-sub fade-up delay-2">Clariosity is a peer-driven community where L&amp;D professionals share what their function is really like — budgets, tools, vendors, priorities, and culture — so others can make better career, vendor, and strategy decisions.</p>
+          <form class="signup-form fade-up delay-3" id="hero-form" action="https://formspree.io/f/mwvyqbre" method="POST" novalidate>
+            <input type="hidden" name="_subject" value="New Clariosity waitlist signup (hero)" />
+            <input type="hidden" name="source" value="hero" />
+            <input type="email" name="email" placeholder="you@company.com" aria-label="Email address" required />
+            <button type="submit" class="btn-primary">Join the waitlist</button>
+          </form>
+          <p class="signup-meta fade-up delay-3">First in line gets early access and helps shape the product.</p>
+          <div class="signup-success" id="hero-success">Thanks. You're on the list — we'll be in touch soon.</div>
+          <div class="signup-error" id="hero-error"></div>
+        </div>
+        <div class="preview-wrap fade-up delay-4">
+          <div class="preview-card" aria-hidden="true">
+            <div class="pc-head">
+              <div>
+                <p class="pc-co">Northwind Software</p>
+                <p class="pc-meta">Tech / SaaS · 1,000–5,000 FTE · United Kingdom</p>
+              </div>
+              <span class="pc-badge">5 contributors</span>
+            </div>
+            <div class="pc-section">
+              <p class="pc-label">L&amp;D function</p>
+              <div class="pc-stat-row"><span>Team size</span><span>12 (1 : 850)</span></div>
+              <div class="pc-stat-row"><span>Reports to</span><span>Chief People Officer</span></div>
+              <div class="pc-stat-row"><span>Budget per FTE</span><span>£400 – £500</span></div>
+            </div>
+            <div class="pc-section">
+              <p class="pc-label">Top priorities, 2026</p>
+              <div class="pc-priorities">
+                <span class="pc-tag">Leadership development</span>
+                <span class="pc-tag">AI literacy</span>
+                <span class="pc-tag">Compliance</span>
+              </div>
+            </div>
+            <div class="pc-section">
+              <p class="pc-label">Tooling</p>
+              <div class="pc-vendor-row"><span class="pc-vendor-name">Workday Learning</span><span class="pc-stars">★★★☆☆</span></div>
+              <div class="pc-vendor-row"><span class="pc-vendor-name">Coursera for Business</span><span class="pc-stars">★★★★☆</span></div>
+              <div class="pc-vendor-row"><span class="pc-vendor-name">LinkedIn Learning</span><span class="pc-stars">★★★★★</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container">
+      <div class="problem-grid">
+        <div>
+          <span class="section-eyebrow">The problem</span>
+          <h2 class="section-title">L&amp;D operates blind — and that's by accident, not design.</h2>
+          <p style="color: var(--text-muted); margin: 0;">Career, vendor, and budget decisions get made on hunches because the peer data is locked in private DMs, expensive industry reports, and the heads of the people doing the job. Every L&amp;D pro ends up reinventing the same answers in isolation.</p>
+        </div>
+        <div class="problem-points">
+          <div class="problem-point"><strong>Career decisions on hunches</strong><span>What's the L&amp;D function actually like? You find out three months in.</span></div>
+          <div class="problem-point"><strong>Vendor pitches replace peer evidence</strong><span>Six-figure decisions with no comparison data.</span></div>
+          <div class="problem-point"><strong>Budgets defended without context</strong><span>Above average or below? You're guessing.</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div style="max-width: 720px;">
+        <span class="section-eyebrow">What you get</span>
+        <h2 class="section-title">Three things you can't get anywhere else.</h2>
+        <p class="section-lede">The data L&amp;D pros most want — about each other — pulled together for the first time.</p>
+      </div>
+      <div class="hooks-grid">
+        <article class="hook-card"><span class="hook-num">01</span><h3>Job-search insight</h3><p>Interviewing for an L&amp;D role? See what the function is really like before you take the offer — team size, budget, priorities, current stack, culture.</p></article>
+        <article class="hook-card"><span class="hook-num">02</span><h3>Anonymized peer benchmarking</h3><p>Where do you sit vs. similar companies? Budget per FTE, team structure, reporting line, tooling — all banded, all compared to peers your size.</p></article>
+        <article class="hook-card"><span class="hook-num">03</span><h3>Vendor reality check</h3><p>What LMSes, LXPs, coaching platforms, and content libraries are companies like yours actually using? What do they pay? Are they happy? Real ratings from real users.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container">
+      <div style="max-width: 720px;">
+        <span class="section-eyebrow">How it works</span>
+        <h2 class="section-title">Give once. Gain access for the year.</h2>
+        <p class="section-lede">Anonymous at the individual level. Named at the company level. Sensitive data is shown in bands, and only once enough peers contribute.</p>
+      </div>
+      <div class="how-grid">
+        <div class="how-step"><h4>Contribute your profile</h4><p>One structured form covering team size, budget band, priorities, and the vendors you use with satisfaction scores.</p></div>
+        <div class="how-step"><h4>Unlock the database</h4><p>Read access to every other contributing company for 12 months. Search, filter, compare, decide.</p></div>
+        <div class="how-step"><h4>Refresh annually</h4><p>Update your profile each year to keep access. The community stays current; nobody freeloads forever.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div style="text-align: center; margin-bottom: 40px;">
+        <span class="section-eyebrow">Who joins Clariosity</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Built for the people doing the job.</h2>
+      </div>
+      <div class="audience-grid">
+        <div class="audience-pill">L&amp;D leaders<em>Heads, Directors, CLOs</em></div>
+        <div class="audience-pill">Managers &amp; specialists<em>Mid-market and enterprise</em></div>
+        <div class="audience-pill">Instructional designers<em>LXD, ID, learning experience</em></div>
+        <div class="audience-pill">Consultants &amp; freelancers<em>Independent practitioners</em></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt">
+    <div class="container">
+      <div style="max-width: 720px; margin: 0 auto 40px; text-align: center;">
+        <span class="section-eyebrow">Common questions</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Things people are asking.</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item"><summary>Who can join Clariosity?</summary><div class="faq-answer">Any L&amp;D professional — leaders, managers, specialists, instructional designers, consultants, freelancers. We're starting with strongest density in the US and UK, but anyone in L&amp;D anywhere is welcome.</div></details>
+        <details class="faq-item"><summary>What do I share, and who sees it?</summary><div class="faq-answer">You'll fill out a structured profile of your company's L&amp;D function: team size, budget band, top priorities, the tools and vendors you use with satisfaction ratings. Anyone else who's contributed can read your profile alongside every other contributing company. No one ever sees who contributed any individual entry.</div></details>
+        <details class="faq-item"><summary>How is anonymity protected?</summary><div class="faq-answer">Contributors are anonymous at the individual level — your name is never tied to a profile. Companies are named, but sensitive data (specific budget figures, salaries) is shown in bands, and only after multiple peers from a company have contributed. Single-contributor companies show only structural information.</div></details>
+        <details class="faq-item"><summary>What does it cost?</summary><div class="faq-answer">Free to contribute and read for active members. Long-term, paid tiers will be aimed at recruiters and vendors who want deeper access — never at the L&amp;D community itself. Contributors keep free access by refreshing their profile annually.</div></details>
+        <details class="faq-item"><summary>What if my company hasn't given me permission to share?</summary><div class="faq-answer">The data we collect is non-confidential information that doesn't typically require explicit authorization — functional structure, vendor names in use, broad budget ranges, public-facing priorities. If you're unsure about anything specific, share what you're comfortable with. Partial profiles are welcome.</div></details>
+        <details class="faq-item"><summary>When does Clariosity launch?</summary><div class="faq-answer">Limited beta in Q3 2026, broader access by year-end. Waitlist members get priority access and the chance to shape what gets built. Sign up below and we'll keep you posted.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <section class="final-cta" id="join">
+    <div class="container">
+      <div class="final-card">
+        <h2>First in line gets early access — and shapes what we build.</h2>
+        <p>Drop your email and tell us which hook pulls hardest. We'll be in touch as soon as there's something to play with.</p>
+        <form class="signup-form" id="cta-form" action="https://formspree.io/f/mwvyqbre" method="POST" novalidate style="max-width: 100%; display: block;">
+          <input type="hidden" name="_subject" value="New Clariosity waitlist signup (CTA)" />
+          <input type="hidden" name="source" value="cta" />
+          <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+            <input type="email" name="email" placeholder="you@company.com" aria-label="Email address" required style="flex: 1; min-width: 240px; padding: 14px 16px; font-family: inherit; font-size: 16px; color: var(--text); background: var(--surface); border: 1px solid var(--border-strong); border-radius: 10px;" />
+            <button type="submit" class="btn-primary">Get early access</button>
+          </div>
+          <div class="filter-question">
+            <label class="q">Which would pull you in most? <span style="color: var(--text-faint); font-weight: 400;">(optional, helps us prioritise)</span></label>
+            <div class="filter-options">
+              <label><input type="radio" name="hook" value="jobs" /><span><strong>Job-search insight</strong> — see what L&amp;D is really like at companies I'm interviewing with.</span></label>
+              <label><input type="radio" name="hook" value="benchmarking" /><span><strong>Peer benchmarking</strong> — where my function sits vs. similar companies.</span></label>
+              <label><input type="radio" name="hook" value="vendors" /><span><strong>Vendor reality check</strong> — what peers actually use, pay, and rate.</span></label>
+            </div>
+          </div>
+        </form>
+        <div class="signup-success" id="cta-success" style="margin-top: 20px;">Thanks. You're on the list — we'll be in touch soon.</div>
+        <div class="signup-error" id="cta-error" style="margin-top: 20px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="wordmark">
+        <svg class="wordmark-mark" width="20" height="20" viewBox="0 0 56 56" fill="#0F4C4F" aria-hidden="true">
+          <circle cx="28" cy="28" r="7"/>
+          <circle cx="28" cy="12" r="4.5"/>
+          <circle cx="41.86" cy="20" r="4.5"/>
+          <circle cx="41.86" cy="36" r="4.5"/>
+          <circle cx="28" cy="44" r="4.5"/>
+          <circle cx="14.14" cy="36" r="4.5"/>
+          <circle cx="14.14" cy="20" r="4.5"/>
+        </svg>
+        <span>Clari<span class="accent">osity</span></span>
+      </div>
+      <span class="foot-meta">© 2026 · A community for L&amp;D professionals</span>
+      <a href="mailto:hello@clariosity.co" class="foot-link">hello@clariosity.co</a>
+    </div>
+  </footer>
+
+  <script>
+    function handleSubmit(formId, successId, errorId) {
+      const form = document.getElementById(formId);
+      const success = document.getElementById(successId);
+      const errorEl = document.getElementById(errorId);
+      if (!form) return;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const emailInput = form.querySelector('input[type="email"]');
+        const email = emailInput.value.trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { emailInput.focus(); return; }
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Joining…';
+        if (errorEl) errorEl.classList.remove('visible');
+        try {
+          const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+          if (response.ok) { form.style.display = 'none'; success.classList.add('visible'); }
+          else {
+            const data = await response.json().catch(() => ({}));
+            const msg = (data.errors && data.errors[0] && data.errors[0].message) ? data.errors[0].message : 'Something went wrong. Please try again.';
+            if (errorEl) { errorEl.textContent = msg; errorEl.classList.add('visible'); }
+            submitBtn.disabled = false; submitBtn.textContent = originalBtnText;
+          }
+        } catch (err) {
+          if (errorEl) { errorEl.textContent = 'Network error. Please check your connection and try again.'; errorEl.classList.add('visible'); }
+          submitBtn.disabled = false; submitBtn.textContent = originalBtnText;
+        }
+      });
+    }
+    handleSubmit('hero-form', 'hero-success', 'hero-error');
+    handleSubmit('cta-form', 'cta-success', 'cta-error');
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { if (window.scrollY > 8) nav.classList.add('scrolled'); else nav.classList.remove('scrolled'); });
+  </script>
+</body>
+</html>
