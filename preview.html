@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clariosity — Database preview</title>
+  <meta name="description" content="A preview of what Clariosity will look like — example company profiles showing budget, tooling, priorities, ratings, and culture for L&D functions across industries." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Crect width='56' height='56' rx='12' fill='%230F4C4F'/%3E%3Cg fill='%23FAF8F3'%3E%3Ccircle cx='28' cy='28' r='6.5'/%3E%3Ccircle cx='28' cy='12' r='4'/%3E%3Ccircle cx='41.86' cy='20' r='4'/%3E%3Ccircle cx='41.86' cy='36' r='4'/%3E%3Ccircle cx='28' cy='44' r='4'/%3E%3Ccircle cx='14.14' cy='36' r='4'/%3E%3Ccircle cx='14.14' cy='20' r='4'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #FAF8F3;
+      --surface: #FFFFFF;
+      --text: #0F172A;
+      --text-muted: #475569;
+      --text-faint: #94A3B8;
+      --accent: #0F4C4F;
+      --accent-hover: #134E4A;
+      --accent-soft: #E6F0EF;
+      --accent-tint: #F2F8F7;
+      --positive: #16A34A;
+      --positive-soft: #DCFCE7;
+      --warning: #CA8A04;
+      --border: #E7E5E0;
+      --border-strong: #D6D3CC;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --max-width: 1280px;
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.06);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 16px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wordmark { display: inline-flex; align-items: center; gap: 10px; font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 22px; letter-spacing: -0.01em; color: var(--text); line-height: 1; }
+    .wordmark .accent { color: var(--accent); }
+    .wordmark .wordmark-mark { flex: 0 0 auto; display: block; }
+    .wordmark:hover { text-decoration: none; }
+
+    nav.site-nav { padding: 22px 0; position: sticky; top: 0; background: rgba(250, 248, 243, 0.92); backdrop-filter: saturate(180%) blur(8px); -webkit-backdrop-filter: saturate(180%) blur(8px); z-index: 50; border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
+    nav.site-nav.scrolled { border-color: var(--border); }
+    nav.site-nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .nav-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--text); padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--surface); transition: all 0.15s ease; }
+    .nav-cta:hover { background: var(--accent); color: #fff; border-color: var(--accent); text-decoration: none; }
+
+    /* ---------- Page header ---------- */
+    .page-header { padding: 36px 0 24px; }
+    .eyebrow { display: inline-block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); padding: 5px 11px; background: var(--accent-soft); border-radius: 999px; margin-bottom: 14px; }
+    h1.page-title { font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(30px, 4vw, 42px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 12px; max-width: 22ch; }
+    .page-lede { font-size: 17px; color: var(--text-muted); max-width: 60ch; margin: 0; }
+    .demo-note { margin-top: 18px; padding: 12px 16px; background: var(--accent-tint); border: 1px solid var(--accent-soft); border-radius: 10px; color: var(--text); font-size: 13.5px; max-width: 70ch; }
+    .demo-note strong { color: var(--accent); }
+
+    /* ---------- Profile page layout ---------- */
+    .profile-page { display: grid; grid-template-columns: 180px 1fr 320px; gap: 32px; align-items: start; padding: 24px 0 64px; }
+    @media (max-width: 1100px) { .profile-page { grid-template-columns: 160px 1fr; } .profile-sidebar { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; } }
+    @media (max-width: 720px) { .profile-page { grid-template-columns: 1fr; } .profile-nav { display: none; } }
+
+    /* Sidebar nav */
+    .profile-nav { position: sticky; top: 88px; }
+    .profile-nav ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 2px; }
+    .profile-nav li a { display: block; padding: 8px 12px; font-size: 14px; font-weight: 500; color: var(--text-muted); border-radius: 8px; border-left: 2px solid transparent; transition: all 0.15s ease; }
+    .profile-nav li a:hover { color: var(--accent); background: var(--accent-tint); text-decoration: none; }
+    .profile-nav li a.active { color: var(--accent); background: var(--accent-soft); border-left-color: var(--accent); font-weight: 600; }
+
+    /* Main column */
+    .profile-main { display: flex; flex-direction: column; gap: 20px; min-width: 0; }
+    .profile-main h2.profile-title { font-family: 'Source Serif 4', serif; font-weight: 500; font-size: clamp(24px, 3vw, 30px); line-height: 1.2; letter-spacing: -0.015em; margin: 0 0 4px; color: var(--text); }
+    .profile-main .profile-subtitle { color: var(--text-muted); font-size: 14.5px; margin: 0; }
+
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; }
+    .card h3.card-title { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 20px; letter-spacing: -0.01em; margin: 0 0 6px; color: var(--text); }
+    .card .card-lede { color: var(--text-muted); font-size: 14px; margin: 0 0 18px; }
+
+    /* Highlights */
+    .highlight { display: flex; align-items: flex-start; gap: 16px; padding: 14px 0; border-top: 1px solid var(--border); }
+    .highlight:first-of-type { border-top: none; padding-top: 4px; }
+    .highlight-icon { flex: 0 0 auto; width: 38px; height: 38px; border-radius: 10px; background: var(--accent-soft); color: var(--accent); display: flex; align-items: center; justify-content: center; }
+    .highlight-icon svg { width: 18px; height: 18px; }
+    .highlight-body { flex: 1; min-width: 0; }
+    .highlight-body strong { display: block; font-weight: 600; color: var(--text); margin-bottom: 2px; font-size: 15px; }
+    .highlight-body span { color: var(--text-muted); font-size: 14px; }
+
+    /* Ratings table */
+    .ratings-table { width: 100%; }
+    .ratings-table thead tr { font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); }
+    .ratings-table thead th { text-align: left; padding: 0 0 12px; font-weight: 600; }
+    .ratings-table thead th.right { text-align: left; }
+    .ratings-row { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 16px; padding: 18px 0; border-top: 1px solid var(--border); align-items: center; }
+    .ratings-row:first-of-type { border-top: 1px solid var(--border); }
+    .ratings-cat { display: flex; flex-direction: column; gap: 8px; }
+    .ratings-cat .name { font-weight: 600; font-size: 15px; color: var(--text); }
+    .ratings-cat .stars { display: flex; align-items: center; gap: 8px; }
+    .ratings-cat .stars-num { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 22px; color: var(--text); letter-spacing: -0.01em; }
+    .stars-display { display: inline-flex; gap: 1px; }
+    .star { display: inline-block; width: 16px; height: 16px; }
+    .star.filled { background: var(--positive); border-radius: 2px; position: relative; }
+    .star.filled::after { content: '★'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 11px; line-height: 1; }
+    .star.half { background: linear-gradient(90deg, var(--positive) 50%, #E5E7EB 50%); border-radius: 2px; position: relative; }
+    .star.half::after { content: '★'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-size: 11px; line-height: 1; }
+    .star.empty { background: #E5E7EB; border-radius: 2px; }
+    .pct-cell { display: flex; flex-direction: column; gap: 4px; }
+    .pct-cell .pct-bar { display: flex; align-items: center; gap: 8px; }
+    .pct-cell .pct-track { flex: 0 0 3px; height: 28px; background: var(--positive); border-radius: 2px; }
+    .pct-cell .pct-track.high { background: var(--positive); }
+    .pct-cell .pct-track.med { background: var(--warning); }
+    .pct-cell .pct-num { font-weight: 600; font-size: 15px; color: var(--text); }
+    .pct-cell .pct-num.high { color: var(--positive); }
+    .pct-cell .pct-num.med { color: var(--warning); }
+    .pct-cell .pct-meta { font-size: 12.5px; color: var(--text-muted); }
+    .rank-cell { display: flex; flex-direction: column; gap: 4px; }
+    .rank-cell .rank-num { font-weight: 600; font-size: 15px; color: var(--text); }
+    .rank-cell .rank-meta { font-size: 12.5px; color: var(--text-muted); }
+
+    /* Right sidebar cards */
+    .profile-sidebar { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 88px; }
+    @media (max-width: 1100px) { .profile-sidebar { position: static; } }
+    .sb-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px; }
+    .sb-card h4 { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 16px; letter-spacing: -0.01em; margin: 0 0 14px; color: var(--text); }
+    .about-row { display: flex; align-items: center; gap: 10px; padding: 6px 0; font-size: 13.5px; color: var(--text-muted); }
+    .about-row svg { flex: 0 0 auto; color: var(--text-faint); }
+    .about-row span { color: var(--text); }
+    .about-desc { margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 13.5px; color: var(--text-muted); line-height: 1.55; }
+    .about-desc a { font-weight: 500; }
+
+    .score-wrap { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 8px 0 4px; }
+    .donut { position: relative; width: 168px; height: 168px; }
+    .donut svg { transform: rotate(-90deg); }
+    .donut-track { stroke: #E5E7EB; }
+    .donut-fill { stroke: #2563EB; stroke-linecap: round; transition: stroke-dashoffset 0.6s ease; }
+    .donut-text { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    .donut-pct { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 32px; color: var(--text); letter-spacing: -0.01em; line-height: 1; }
+    .donut-meta { font-size: 12.5px; color: var(--text-muted); margin-top: 4px; text-align: center; max-width: 16ch; }
+    .donut-label { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px; background: var(--positive-soft); color: var(--positive); border-radius: 999px; font-size: 12px; font-weight: 600; margin-bottom: 4px; }
+    .score-compare { width: 100%; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--border); display: flex; flex-direction: column; gap: 8px; }
+    .score-row { display: flex; justify-content: space-between; align-items: baseline; font-size: 13.5px; }
+    .score-row .lbl { color: var(--text-muted); }
+    .score-row .val { color: var(--text); font-weight: 600; }
+    .score-blurb { margin-top: 14px; font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+
+    .job-row { display: flex; gap: 10px; padding: 10px 0; border-top: 1px solid var(--border); align-items: flex-start; }
+    .job-row:first-of-type { border-top: none; padding-top: 4px; }
+    .job-logo { flex: 0 0 auto; width: 36px; height: 36px; background: var(--bg); border: 1px solid var(--border); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-family: 'Source Serif 4', serif; font-weight: 600; color: var(--accent); font-size: 14px; }
+    .job-meta { flex: 1; min-width: 0; }
+    .job-title { font-weight: 500; font-size: 13.5px; color: var(--text); margin: 0 0 2px; line-height: 1.35; }
+    .job-co { font-size: 12px; color: var(--text-muted); margin: 0; }
+
+    /* Other companies */
+    section.other { padding: 56px 0 48px; border-top: 1px solid var(--border); margin-top: 24px; }
+    section.other h2 { font-family: 'Source Serif 4', serif; font-weight: 500; font-size: 28px; letter-spacing: -0.02em; margin: 0 0 8px; }
+    section.other p.lede { color: var(--text-muted); margin: 0 0 32px; max-width: 60ch; }
+    .other-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+    .other-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 22px; transition: all 0.2s ease; }
+    .other-card:hover { border-color: var(--border-strong); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+    .other-card h3 { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 18px; letter-spacing: -0.01em; margin: 0 0 4px; color: var(--text); }
+    .other-card .meta { color: var(--text-muted); font-size: 13px; margin: 0 0 14px; }
+    .other-stats { display: flex; flex-direction: column; gap: 6px; padding: 12px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); margin-bottom: 14px; }
+    .other-stat { display: flex; justify-content: space-between; font-size: 13px; }
+    .other-stat .lbl { color: var(--text-muted); }
+    .other-stat .val { color: var(--text); font-weight: 500; }
+    .other-card .footer { display: flex; justify-content: space-between; align-items: center; }
+    .other-card .badge-mini { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); background: var(--accent-soft); padding: 3px 9px; border-radius: 999px; }
+    .other-card .score-mini { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--positive); font-weight: 600; }
+
+    /* CTA */
+    section.cta-section { padding: 48px 0 80px; }
+    .cta-card { background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-lg); padding: 40px; max-width: 720px; margin: 0 auto; text-align: center; }
+    .cta-card h2 { font-family: 'Source Serif 4', serif; font-weight: 500; font-size: clamp(24px, 3vw, 32px); letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 12px; }
+    .cta-card p { color: var(--text-muted); font-size: 16px; margin: 0 0 24px; }
+    .signup-form { display: flex; gap: 8px; max-width: 460px; margin: 0 auto; flex-wrap: wrap; }
+    .signup-form input[type="email"] { flex: 1; min-width: 220px; padding: 13px 16px; font-family: inherit; font-size: 15.5px; color: var(--text); background: var(--bg); border: 1px solid var(--border-strong); border-radius: 10px; transition: all 0.15s ease; }
+    .signup-form input[type="email"]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+    .btn-primary { padding: 13px 22px; font-family: inherit; font-size: 15.5px; font-weight: 500; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: 10px; cursor: pointer; transition: background 0.15s ease, transform 0.05s ease; }
+    .btn-primary:hover { background: var(--accent-hover); }
+    .btn-primary:active { transform: translateY(1px); }
+    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+    .signup-success { display: none; margin-top: 14px; padding: 12px 18px; background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 10px; color: var(--accent); font-weight: 500; font-size: 14.5px; }
+    .signup-success.visible { display: block; }
+    .signup-error { display: none; margin-top: 14px; padding: 12px 18px; background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 10px; color: #B91C1C; font-weight: 500; font-size: 14.5px; }
+    .signup-error.visible { display: block; }
+
+    footer { padding: 32px 0; border-top: 1px solid var(--border); background: var(--bg); }
+    footer .container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    footer .wordmark { font-size: 17px; }
+    .foot-meta { color: var(--text-faint); font-size: 13.5px; }
+    .foot-link { color: var(--text-muted); font-size: 13.5px; }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" id="nav">
+    <div class="container">
+      <a href="/" class="wordmark">
+        <svg class="wordmark-mark" width="22" height="22" viewBox="0 0 56 56" fill="#0F4C4F" aria-hidden="true">
+          <circle cx="28" cy="28" r="7"/>
+          <circle cx="28" cy="12" r="4.5"/>
+          <circle cx="41.86" cy="20" r="4.5"/>
+          <circle cx="41.86" cy="36" r="4.5"/>
+          <circle cx="28" cy="44" r="4.5"/>
+          <circle cx="14.14" cy="36" r="4.5"/>
+          <circle cx="14.14" cy="20" r="4.5"/>
+        </svg>
+        <span>Clari<span class="accent">osity</span></span>
+      </a>
+      <a href="/#join" class="nav-cta">Join the waitlist</a>
+    </div>
+  </nav>
+
+  <section class="page-header">
+    <div class="container">
+      <span class="eyebrow">Database preview</span>
+      <h1 class="page-title">What you'll see when Clariosity launches.</h1>
+      <p class="page-lede">A preview of how an L&amp;D function appears once peers contribute their profiles. Below: one company in full detail, plus four more in summary.</p>
+      <div class="demo-note"><strong>Note:</strong> the profiles below are anonymised demos using composite data. Real profiles are contributed by L&amp;D pros — anonymous at the individual level, with sensitive data shown only in bands once enough peers contribute.</div>
+    </div>
+  </section>
+
+  <!-- ============================ Detailed profile ============================ -->
+  <div class="container">
+    <div class="profile-page">
+
+      <!-- ===== Sidebar nav ===== -->
+      <aside class="profile-nav" aria-label="Profile sections">
+        <ul>
+          <li><a href="#overview" class="active">Overview</a></li>
+          <li><a href="#compensation">Compensation</a></li>
+          <li><a href="#budget">Budget</a></li>
+          <li><a href="#tooling">Tooling</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#qa">Q&amp;A</a></li>
+          <li><a href="#culture">Culture</a></li>
+          <li><a href="#jobs">Jobs</a></li>
+        </ul>
+      </aside>
+
+      <!-- ===== Main content ===== -->
+      <main class="profile-main" id="overview">
+
+        <div>
+          <h2 class="profile-title">What it's like to work in L&amp;D at Northwind Software</h2>
+          <p class="profile-subtitle">Composite profile based on 5 anonymised peer contributions.</p>
+        </div>
+
+        <!-- Highlights card -->
+        <div class="card">
+          <h3 class="card-title">Northwind L&amp;D Org Highlights</h3>
+
+          <div class="highlight">
+            <div class="highlight-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 16.8 5.8 21.3l2.4-7.4L2 9.4h7.6z"/></svg>
+            </div>
+            <div class="highlight-body">
+              <strong>Top Function on Clariosity</strong>
+              <span>Northwind ranks in the top 25% of L&amp;D functions across Software companies its size.</span>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <div class="highlight-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><polyline points="9 12 11 14 15 9"/></svg>
+            </div>
+            <div class="highlight-body">
+              <strong>Above-Average Budget</strong>
+              <span>Budget per FTE (£400–£500) sits 18% above the Software industry median.</span>
+            </div>
+          </div>
+
+          <div class="highlight">
+            <div class="highlight-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="8" r="3.5"/><path d="M5 21c0-3.5 3-6 7-6s7 2.5 7 6"/></svg>
+            </div>
+            <div class="highlight-body">
+              <strong>Strong Career Path</strong>
+              <span>Director-level salaries in the top 30% of UK Software L&amp;D roles. Three internal promotions to Head of L&amp;D in last 24 months.</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ratings card -->
+        <div class="card">
+          <h3 class="card-title">Northwind Performance Category Ratings</h3>
+          <p class="card-lede">See how L&amp;D pros rated Northwind in Clariosity's six performance categories.</p>
+
+          <div class="ratings-table">
+            <div class="ratings-row" style="border-top: none;">
+              <div style="font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint);">Category Score</div>
+              <div style="font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint);">Industry Percentile</div>
+              <div style="font-size: 11.5px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint);">Industry Rank</div>
+            </div>
+
+            <div class="ratings-row">
+              <div class="ratings-cat">
+                <span class="name">Leadership Buy-In</span>
+                <div class="stars">
+                  <span class="stars-num">4.2</span>
+                  <span class="stars-display">
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star empty"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="pct-cell">
+                <div class="pct-bar"><span class="pct-track high"></span><span class="pct-num high">78th%</span></div>
+                <span class="pct-meta">of Software L&amp;D orgs</span>
+              </div>
+              <div class="rank-cell">
+                <span class="rank-num">#234</span>
+                <span class="rank-meta">of 1,420 Software L&amp;D orgs</span>
+              </div>
+            </div>
+
+            <div class="ratings-row">
+              <div class="ratings-cat">
+                <span class="name">Compensation</span>
+                <div class="stars">
+                  <span class="stars-num">3.8</span>
+                  <span class="stars-display">
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star half"></span>
+                    <span class="star empty"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="pct-cell">
+                <div class="pct-bar"><span class="pct-track med"></span><span class="pct-num med">65th%</span></div>
+                <span class="pct-meta">of Software L&amp;D orgs</span>
+              </div>
+              <div class="rank-cell">
+                <span class="rank-num">#401</span>
+                <span class="rank-meta">of 1,420 Software L&amp;D orgs</span>
+              </div>
+            </div>
+
+            <div class="ratings-row">
+              <div class="ratings-cat">
+                <span class="name">Budget Adequacy</span>
+                <div class="stars">
+                  <span class="stars-num">4.0</span>
+                  <span class="stars-display">
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star empty"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="pct-cell">
+                <div class="pct-bar"><span class="pct-track high"></span><span class="pct-num high">72nd%</span></div>
+                <span class="pct-meta">of Software L&amp;D orgs</span>
+              </div>
+              <div class="rank-cell">
+                <span class="rank-num">#289</span>
+                <span class="rank-meta">of 1,420 Software L&amp;D orgs</span>
+              </div>
+            </div>
+
+            <div class="ratings-row">
+              <div class="ratings-cat">
+                <span class="name">Strategic Influence</span>
+                <div class="stars">
+                  <span class="stars-num">4.4</span>
+                  <span class="stars-display">
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star half"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="pct-cell">
+                <div class="pct-bar"><span class="pct-track high"></span><span class="pct-num high">84th%</span></div>
+                <span class="pct-meta">of Software L&amp;D orgs</span>
+              </div>
+              <div class="rank-cell">
+                <span class="rank-num">#178</span>
+                <span class="rank-meta">of 1,420 Software L&amp;D orgs</span>
+              </div>
+            </div>
+
+            <div class="ratings-row">
+              <div class="ratings-cat">
+                <span class="name">Career Development</span>
+                <div class="stars">
+                  <span class="stars-num">3.6</span>
+                  <span class="stars-display">
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star half"></span>
+                    <span class="star empty"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="pct-cell">
+                <div class="pct-bar"><span class="pct-track med"></span><span class="pct-num med">58th%</span></div>
+                <span class="pct-meta">of Software L&amp;D orgs</span>
+              </div>
+              <div class="rank-cell">
+                <span class="rank-num">#487</span>
+                <span class="rank-meta">of 1,420 Software L&amp;D orgs</span>
+              </div>
+            </div>
+
+            <div class="ratings-row">
+              <div class="ratings-cat">
+                <span class="name">Tooling Quality</span>
+                <div class="stars">
+                  <span class="stars-num">3.4</span>
+                  <span class="stars-display">
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star filled"></span>
+                    <span class="star half"></span>
+                    <span class="star empty"></span>
+                  </span>
+                </div>
+              </div>
+              <div class="pct-cell">
+                <div class="pct-bar"><span class="pct-track med"></span><span class="pct-num med">51st%</span></div>
+                <span class="pct-meta">of Software L&amp;D orgs</span>
+              </div>
+              <div class="rank-cell">
+                <span class="rank-num">#602</span>
+                <span class="rank-meta">of 1,420 Software L&amp;D orgs</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+
+      <!-- ===== Right sidebar ===== -->
+      <aside class="profile-sidebar">
+
+        <!-- About card -->
+        <div class="sb-card">
+          <h4>About Northwind Software</h4>
+          <div class="about-row">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            <span>northwind.example</span>
+          </div>
+          <div class="about-row">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg>
+            <span>Software</span>
+          </div>
+          <div class="about-row">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="2" x2="12" y2="22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            <span>Series D · Venture-backed</span>
+          </div>
+          <div class="about-row">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            <span>1,000–5,000 FTE</span>
+          </div>
+          <div class="about-row">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span>London Region, UK</span>
+          </div>
+          <div class="about-desc">
+            Northwind Software is a B2B software platform serving mid-market and enterprise customers globally. The L&amp;D function reports into the Chief People Officer and supports a fast-growing engineering, sales, and customer success organisation. <a href="#">More</a>
+          </div>
+        </div>
+
+        <!-- Score card -->
+        <div class="sb-card">
+          <h4>Would L&amp;D pros recommend joining Northwind?</h4>
+
+          <div class="score-wrap">
+            <span class="donut-label">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              Excellent
+            </span>
+            <div class="donut">
+              <svg width="168" height="168" viewBox="0 0 168 168">
+                <circle class="donut-track" cx="84" cy="84" r="72" fill="none" stroke-width="14"/>
+                <circle class="donut-fill" cx="84" cy="84" r="72" fill="none" stroke-width="14" stroke-dasharray="452.39" stroke-dashoffset="99.5"/>
+              </svg>
+              <div class="donut-text">
+                <span class="donut-pct">78%</span>
+                <span class="donut-meta">would recommend joining</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="score-compare">
+            <div class="score-row"><span class="lbl">Software Industry Average</span><span class="val">64%</span></div>
+            <div class="score-row"><span class="lbl">Global Average</span><span class="val">67%</span></div>
+          </div>
+
+          <p class="score-blurb">Approximately 78% of L&amp;D pros at Northwind would recommend it to a peer, based on ratings submitted in the past 12 months.</p>
+        </div>
+
+        <!-- Jobs card -->
+        <div class="sb-card">
+          <h4>Open L&amp;D Roles at Northwind</h4>
+          <div class="job-row">
+            <div class="job-logo">N</div>
+            <div class="job-meta">
+              <p class="job-title">Senior L&amp;D Manager</p>
+              <p class="job-co">Northwind · London (hybrid)</p>
+            </div>
+          </div>
+          <div class="job-row">
+            <div class="job-logo">N</div>
+            <div class="job-meta">
+              <p class="job-title">Learning Experience Designer</p>
+              <p class="job-co">Northwind · Remote, UK</p>
+            </div>
+          </div>
+          <div class="job-row">
+            <div class="job-logo">N</div>
+            <div class="job-meta">
+              <p class="job-title">L&amp;D Operations Lead</p>
+              <p class="job-co">Northwind · London (hybrid)</p>
+            </div>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- ============================ Other companies ============================ -->
+  <section class="other">
+    <div class="container">
+      <h2>More from the Clariosity database</h2>
+      <p class="lede">Four more anonymised demo profiles spanning different industries, sizes, and geographies. Each will have its own detailed page like Northwind's above.</p>
+
+      <div class="other-grid">
+
+        <div class="other-card">
+          <span class="badge-mini">8 contributors</span>
+          <h3 style="margin-top: 12px;">Meridian Financial Group</h3>
+          <p class="meta">Financial Services · 5,000–25,000 FTE · United States</p>
+          <div class="other-stats">
+            <div class="other-stat"><span class="lbl">Team size</span><span class="val">32 (1 : 312)</span></div>
+            <div class="other-stat"><span class="lbl">Budget per FTE</span><span class="val">$850 – $1,000</span></div>
+            <div class="other-stat"><span class="lbl">Reports to</span><span class="val">CHRO</span></div>
+          </div>
+          <div class="footer">
+            <span class="score-mini">★ 4.0 overall</span>
+            <span style="font-size: 12.5px; color: var(--text-muted);">71% would recommend</span>
+          </div>
+        </div>
+
+        <div class="other-card">
+          <span class="badge-mini">6 contributors</span>
+          <h3 style="margin-top: 12px;">Acmevista Consulting</h3>
+          <p class="meta">Professional Services · 1,000–5,000 FTE · United Kingdom</p>
+          <div class="other-stats">
+            <div class="other-stat"><span class="lbl">Team size</span><span class="val">18 (1 : 222)</span></div>
+            <div class="other-stat"><span class="lbl">Budget per FTE</span><span class="val">£600 – £800</span></div>
+            <div class="other-stat"><span class="lbl">Reports to</span><span class="val">Head of People</span></div>
+          </div>
+          <div class="footer">
+            <span class="score-mini">★ 4.1 overall</span>
+            <span style="font-size: 12.5px; color: var(--text-muted);">82% would recommend</span>
+          </div>
+        </div>
+
+        <div class="other-card">
+          <span class="badge-mini">4 contributors</span>
+          <h3 style="margin-top: 12px;">Crestline Health</h3>
+          <p class="meta">Healthcare · 5,000–25,000 FTE · United States</p>
+          <div class="other-stats">
+            <div class="other-stat"><span class="lbl">Team size</span><span class="val">24 (1 : 625)</span></div>
+            <div class="other-stat"><span class="lbl">Budget per FTE</span><span class="val">$700 – $900</span></div>
+            <div class="other-stat"><span class="lbl">Reports to</span><span class="val">Chief People Officer</span></div>
+          </div>
+          <div class="footer">
+            <span class="score-mini">★ 3.7 overall</span>
+            <span style="font-size: 12.5px; color: var(--text-muted);">68% would recommend</span>
+          </div>
+        </div>
+
+        <div class="other-card">
+          <span class="badge-mini">3 contributors</span>
+          <h3 style="margin-top: 12px;">Latitude Studios</h3>
+          <p class="meta">Software · 250–1,000 FTE · United Kingdom</p>
+          <div class="other-stats">
+            <div class="other-stat"><span class="lbl">Team size</span><span class="val">4 (1 : 175)</span></div>
+            <div class="other-stat"><span class="lbl">Budget per FTE</span><span class="val">£250 – £400</span></div>
+            <div class="other-stat"><span class="lbl">Reports to</span><span class="val">Chief Executive Officer</span></div>
+          </div>
+          <div class="footer">
+            <span class="score-mini">★ 3.9 overall</span>
+            <span style="font-size: 12.5px; color: var(--text-muted);">74% would recommend</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================ CTA ============================ -->
+  <section class="cta-section">
+    <div class="container">
+      <div class="cta-card">
+        <h2>Want access to the real database?</h2>
+        <p>Join the waitlist. First in line gets early access — and helps shape what we build.</p>
+        <form class="signup-form" id="preview-form" action="https://formspree.io/f/mwvyqbre" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="New Clariosity waitlist signup (preview)" />
+          <input type="hidden" name="source" value="preview" />
+          <input type="email" name="email" placeholder="you@company.com" aria-label="Email address" required />
+          <button type="submit" class="btn-primary">Join the waitlist</button>
+        </form>
+        <div class="signup-success" id="preview-success">Thanks. You're on the list — we'll be in touch soon.</div>
+        <div class="signup-error" id="preview-error"></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <a href="/" class="wordmark">
+        <svg class="wordmark-mark" width="20" height="20" viewBox="0 0 56 56" fill="#0F4C4F" aria-hidden="true">
+          <circle cx="28" cy="28" r="7"/>
+          <circle cx="28" cy="12" r="4.5"/>
+          <circle cx="41.86" cy="20" r="4.5"/>
+          <circle cx="41.86" cy="36" r="4.5"/>
+          <circle cx="28" cy="44" r="4.5"/>
+          <circle cx="14.14" cy="36" r="4.5"/>
+          <circle cx="14.14" cy="20" r="4.5"/>
+        </svg>
+        <span>Clari<span class="accent">osity</span></span>
+      </a>
+      <span class="foot-meta">© 2026 · A community for L&amp;D professionals</span>
+      <a href="mailto:hello@clariosity.co" class="foot-link">hello@clariosity.co</a>
+    </div>
+  </footer>
+
+  <script>
+    function handleSubmit(formId, successId, errorId) {
+      const form = document.getElementById(formId);
+      const success = document.getElementById(successId);
+      const errorEl = document.getElementById(errorId);
+      if (!form) return;
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const emailInput = form.querySelector('input[type="email"]');
+        const email = emailInput.value.trim();
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { emailInput.focus(); return; }
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Joining…';
+        if (errorEl) errorEl.classList.remove('visible');
+        try {
+          const response = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' } });
+          if (response.ok) { form.style.display = 'none'; success.classList.add('visible'); }
+          else {
+            const data = await response.json().catch(() => ({}));
+            const msg = (data.errors && data.errors[0] && data.errors[0].message) ? data.errors[0].message : 'Something went wrong. Please try again.';
+            if (errorEl) { errorEl.textContent = msg; errorEl.classList.add('visible'); }
+            submitBtn.disabled = false; submitBtn.textContent = originalBtnText;
+          }
+        } catch (err) {
+          if (errorEl) { errorEl.textContent = 'Network error. Please check your connection and try again.'; errorEl.classList.add('visible'); }
+          submitBtn.disabled = false; submitBtn.textContent = originalBtnText;
+        }
+      });
+    }
+    handleSubmit('preview-form', 'preview-success', 'preview-error');
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { if (window.scrollY > 8) nav.classList.add('scrolled'); else nav.classList.remove('scrolled'); });
+  </script>
+
+</body>
+</html>
