@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clariosity — Contribute your profile</title>
+  <meta name="description" content="Share your company's L&D profile and unlock the database. Anonymous at the individual level. Free, takes 5–7 minutes." />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Crect width='56' height='56' rx='12' fill='%230F4C4F'/%3E%3Cg fill='%23FAF8F3'%3E%3Ccircle cx='28' cy='28' r='6.5'/%3E%3Ccircle cx='28' cy='12' r='4'/%3E%3Ccircle cx='41.86' cy='20' r='4'/%3E%3Ccircle cx='41.86' cy='36' r='4'/%3E%3Ccircle cx='28' cy='44' r='4'/%3E%3Ccircle cx='14.14' cy='36' r='4'/%3E%3Ccircle cx='14.14' cy='20' r='4'/%3E%3C/g%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #FAF8F3;
+      --surface: #FFFFFF;
+      --text: #0F172A;
+      --text-muted: #475569;
+      --text-faint: #94A3B8;
+      --accent: #0F4C4F;
+      --accent-hover: #134E4A;
+      --accent-soft: #E6F0EF;
+      --accent-tint: #F2F8F7;
+      --border: #E7E5E0;
+      --border-strong: #D6D3CC;
+      --radius: 12px;
+      --radius-lg: 20px;
+      --max-width: 1180px;
+      --content-width: 720px;
+      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.06);
+      --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.08);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Inter', system-ui, -apple-system, sans-serif; font-size: 17px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 24px; }
+    .container--narrow { max-width: var(--content-width); margin: 0 auto; padding: 0 24px; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .wordmark { display: inline-flex; align-items: center; gap: 10px; font-family: 'Source Serif 4', Georgia, serif; font-weight: 600; font-size: 22px; letter-spacing: -0.01em; color: var(--text); line-height: 1; }
+    .wordmark .accent { color: var(--accent); }
+    .wordmark .wordmark-mark { flex: 0 0 auto; display: block; }
+    .wordmark:hover { text-decoration: none; }
+
+    nav.site-nav { padding: 22px 0; position: sticky; top: 0; background: rgba(250, 248, 243, 0.92); backdrop-filter: saturate(180%) blur(8px); -webkit-backdrop-filter: saturate(180%) blur(8px); z-index: 50; border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
+    nav.site-nav.scrolled { border-color: var(--border); }
+    nav.site-nav .container { display: flex; align-items: center; justify-content: space-between; }
+    .nav-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--text); padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--surface); transition: all 0.15s ease; }
+    .nav-cta:hover { background: var(--accent); color: #fff; border-color: var(--accent); text-decoration: none; }
+
+    /* ---------- Page header ---------- */
+    .page-header { padding: 56px 0 32px; }
+    .eyebrow { display: inline-block; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); padding: 6px 12px; background: var(--accent-soft); border-radius: 999px; margin-bottom: 22px; }
+    h1.page-title { font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(36px, 5.2vw, 60px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 18px; max-width: 16ch; }
+    h1.page-title em { font-style: italic; color: var(--accent); }
+    .page-lede { font-size: 19px; color: var(--text-muted); max-width: 60ch; margin: 0 0 36px; line-height: 1.55; }
+
+    .hero-cta { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; font-family: inherit; font-size: 17px; font-weight: 500; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: 12px; transition: background 0.15s ease, transform 0.05s ease; }
+    .hero-cta:hover { background: var(--accent-hover); text-decoration: none; }
+    .hero-cta:active { transform: translateY(1px); }
+    .hero-cta svg { flex: 0 0 auto; }
+    .hero-meta { margin-top: 14px; font-size: 14px; color: var(--text-faint); }
+
+    /* ---------- Steps section ---------- */
+    section.alt { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    section { padding: 64px 0; }
+    .section-eyebrow { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 14px; display: inline-block; }
+    h2.section-title { font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(30px, 3.6vw, 42px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 20px; max-width: 22ch; }
+    p.section-lede { font-size: 18px; color: var(--text-muted); line-height: 1.55; max-width: 60ch; margin: 0 0 40px; }
+
+    .steps-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media (max-width: 880px) { .steps-grid { grid-template-columns: 1fr; } }
+    .step-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
+    .step-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+    .step-num { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 15px; margin-bottom: 18px; }
+    .step-card h3 { font-family: 'Source Serif 4', serif; font-weight: 500; font-size: 22px; letter-spacing: -0.01em; line-height: 1.25; margin: 0 0 10px; }
+    .step-card p { color: var(--text-muted); font-size: 15.5px; line-height: 1.55; margin: 0 0 14px; }
+    .step-card ul { margin: 0; padding: 0; list-style: none; }
+    .step-card ul li { color: var(--text-muted); font-size: 14.5px; padding: 4px 0 4px 22px; position: relative; }
+    .step-card ul li::before { content: '✓'; position: absolute; left: 0; top: 4px; color: var(--accent); font-weight: 600; }
+
+    /* ---------- Trust callouts ---------- */
+    .trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media (max-width: 880px) { .trust-grid { grid-template-columns: 1fr; } }
+    .trust-item { padding-left: 18px; border-left: 2px solid var(--accent); }
+    .trust-item strong { display: block; color: var(--text); margin-bottom: 4px; font-weight: 600; font-size: 16px; }
+    .trust-item span { color: var(--text-muted); font-size: 15px; line-height: 1.55; }
+
+    /* ---------- Primary CTA section ---------- */
+    section.primary-cta { padding: 72px 0; }
+    .cta-card { max-width: 720px; margin: 0 auto; padding: 48px 40px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-md); }
+    .cta-card h2 { font-family: 'Source Serif 4', serif; font-weight: 500; font-size: clamp(28px, 3.4vw, 38px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 14px; }
+    .cta-card p { color: var(--text-muted); font-size: 17px; margin: 0 0 28px; }
+    .cta-card .hero-cta { font-size: 18px; padding: 18px 32px; }
+    .cta-secondary { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--border); font-size: 14.5px; color: var(--text-muted); }
+    .cta-secondary a { font-weight: 500; }
+
+    /* ---------- FAQ ---------- */
+    .faq-list { max-width: 760px; margin: 0 auto; display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--border); }
+    .faq-item { border-bottom: 1px solid var(--border); }
+    .faq-item summary { list-style: none; cursor: pointer; padding: 22px 4px; font-family: 'Source Serif 4', serif; font-weight: 500; font-size: 19px; letter-spacing: -0.01em; color: var(--text); display: flex; align-items: center; justify-content: space-between; gap: 16px; transition: color 0.15s ease; }
+    .faq-item summary::-webkit-details-marker { display: none; }
+    .faq-item summary:hover { color: var(--accent); }
+    .faq-item summary::after { content: '+'; font-family: 'Inter', sans-serif; font-weight: 400; font-size: 22px; color: var(--accent); transition: transform 0.2s ease; flex: 0 0 auto; width: 22px; text-align: center; }
+    .faq-item[open] summary::after { content: '−'; }
+    .faq-answer { padding: 0 4px 22px; color: var(--text-muted); font-size: 16px; line-height: 1.6; max-width: 64ch; }
+
+    /* ---------- Footer ---------- */
+    footer { padding: 40px 0; border-top: 1px solid var(--border); background: var(--bg); }
+    footer .container { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+    footer .wordmark { font-size: 18px; }
+    .foot-meta { color: var(--text-faint); font-size: 14px; }
+    .foot-link { color: var(--text-muted); font-size: 14px; }
+  </style>
+</head>
+<body>
+
+  <nav class="site-nav" id="nav">
+    <div class="container">
+      <a href="/" class="wordmark">
+        <svg class="wordmark-mark" width="22" height="22" viewBox="0 0 56 56" fill="#0F4C4F" aria-hidden="true">
+          <circle cx="28" cy="28" r="7"/>
+          <circle cx="28" cy="12" r="4.5"/>
+          <circle cx="41.86" cy="20" r="4.5"/>
+          <circle cx="41.86" cy="36" r="4.5"/>
+          <circle cx="28" cy="44" r="4.5"/>
+          <circle cx="14.14" cy="36" r="4.5"/>
+          <circle cx="14.14" cy="20" r="4.5"/>
+        </svg>
+        <span>Clari<span class="accent">osity</span></span>
+      </a>
+      <a href="/#join" class="nav-cta">Join the waitlist</a>
+    </div>
+  </nav>
+
+  <!-- ====================== Header ====================== -->
+  <section class="page-header">
+    <div class="container">
+      <span class="eyebrow">Contribute your profile</span>
+      <h1 class="page-title">Share your profile. Unlock the <em>database</em>.</h1>
+      <p class="page-lede">Contribute your company's L&amp;D profile and you'll get read access to every other contributing company's profile for the next 12 months. Anonymous at the individual level, named at the company level. Takes 5–7 minutes.</p>
+      <a href="https://tally.so/r/VLvLdj" class="hero-cta" target="_blank" rel="noopener">
+        Contribute your profile
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+      <p class="hero-meta">Free, 5–7 minutes, anonymous at the individual level.</p>
+    </div>
+  </section>
+
+  <!-- ====================== Give-to-get steps ====================== -->
+  <section class="alt">
+    <div class="container">
+      <div style="max-width: 720px;">
+        <span class="section-eyebrow">How the give-to-get works</span>
+        <h2 class="section-title">Give once. Gain access for the year.</h2>
+        <p class="section-lede">A simple exchange: peer-contributed data only stays peer-contributed if everyone in the community gives a little. Here's what that looks like in practice.</p>
+      </div>
+
+      <div class="steps-grid">
+
+        <div class="step-card">
+          <span class="step-num">01</span>
+          <h3>What you give</h3>
+          <p>One structured profile of your company's L&amp;D function. Fields include:</p>
+          <ul>
+            <li>Company name, industry, headcount band, location</li>
+            <li>L&amp;D team size and reporting line</li>
+            <li>Approximate budget per FTE (banded)</li>
+            <li>Top three strategic priorities for the year</li>
+            <li>Vendors and tools used, with satisfaction ratings</li>
+            <li>Optional: salary band, open jobs, culture notes</li>
+          </ul>
+        </div>
+
+        <div class="step-card">
+          <span class="step-num">02</span>
+          <h3>What you get</h3>
+          <p>Once your profile is reviewed and accepted, you'll receive:</p>
+          <ul>
+            <li>Read access to every contributing company's profile</li>
+            <li>Full filter and search — by industry, size, geography, tooling</li>
+            <li>Peer benchmarking — see where your function sits</li>
+            <li>Vendor satisfaction ratings, in aggregate</li>
+            <li>Access lasts 12 months from your contribution date</li>
+          </ul>
+        </div>
+
+        <div class="step-card">
+          <span class="step-num">03</span>
+          <h3>How access continues</h3>
+          <p>To keep the community fresh and the data current:</p>
+          <ul>
+            <li>Refresh your profile annually to keep access</li>
+            <li>Changed jobs? Submit a new profile for your new company</li>
+            <li>Withdraw your contribution any time</li>
+            <li>No paid tiers for individual L&amp;D pros — ever</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== Trust / Anonymity ====================== -->
+  <section>
+    <div class="container">
+      <div style="max-width: 720px;">
+        <span class="section-eyebrow">Anonymity &amp; trust</span>
+        <h2 class="section-title">Your contribution is protected.</h2>
+        <p class="section-lede">The anonymity model is the central design decision of Clariosity. Three things you should know:</p>
+      </div>
+
+      <div class="trust-grid">
+        <div class="trust-item">
+          <strong>Anonymous at the individual level</strong>
+          <span>Your name is never tied to any profile you submit. We verify contributors privately to maintain data quality, but no one else ever sees who contributed an individual entry.</span>
+        </div>
+        <div class="trust-item">
+          <strong>Sensitive data shown in bands</strong>
+          <span>Specific salary figures, exact budgets, and similar fields appear only as ranges. And only once multiple peers from the same company have contributed — single-contributor companies show only structural information.</span>
+        </div>
+        <div class="trust-item">
+          <strong>You stay in control</strong>
+          <span>Withdraw your contribution at any time and we'll remove it within 7 days. Update your profile whenever your function changes. No data is sold. No data is shared with third parties without your explicit consent.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== Primary CTA ====================== -->
+  <section class="primary-cta">
+    <div class="container">
+      <div class="cta-card">
+        <h2>Ready to contribute?</h2>
+        <p>Five to seven minutes. You'll get access to the database within 48 hours of submission.</p>
+        <a href="https://tally.so/r/VLvLdj" class="hero-cta" target="_blank" rel="noopener">
+          Contribute your profile
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <div class="cta-secondary">
+          Not ready to contribute yet? <a href="https://tally.so/r/KYvedz" target="_blank" rel="noopener">Share quick feedback in our 5-minute survey</a> — helps us shape what we build.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== FAQ ====================== -->
+  <section class="alt">
+    <div class="container">
+      <div style="max-width: 720px; margin: 0 auto 40px; text-align: center;">
+        <span class="section-eyebrow">Common questions</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Things people ask before contributing.</h2>
+      </div>
+
+      <div class="faq-list">
+
+        <details class="faq-item">
+          <summary>What if my company hasn't given me permission to share?</summary>
+          <div class="faq-answer">
+            The data we collect is non-confidential information that doesn't typically require explicit authorization — functional structure, vendor names in use, broad budget ranges, public-facing priorities. If you're unsure about anything specific, share what you're comfortable with. Partial profiles are welcome and still valuable.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How do you verify contributions are accurate?</summary>
+          <div class="faq-answer">
+            In the early phase, every contribution is reviewed by hand. We verify contributors through a LinkedIn URL (kept private, never published) to confirm the contributor genuinely works at — or has recently worked at — the company they're contributing about. Once we have multiple contributors per company, we cross-reference for consistency.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>How long until I get access?</summary>
+          <div class="faq-answer">
+            Within 48 hours of submission for the first wave of contributors. Once we're out of beta and contribution volume grows, we expect this to drop to under 24 hours. You'll receive an access link by email once your profile is reviewed.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>What happens if I leave my company?</summary>
+          <div class="faq-answer">
+            Your existing contribution stays in the database (it represents your company's L&amp;D function at the time you contributed). When you start at a new company, you're welcome to submit a new profile for the new company to keep your access fresh. Or you can withdraw your existing contribution at any time and we'll remove it within 7 days.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Will my contribution ever be sold?</summary>
+          <div class="faq-answer">
+            No. Individual contributions are never sold to third parties. Long-term, Clariosity will offer paid tiers to recruiters and L&amp;D vendors for access to aggregated, anonymised insights — never raw individual contributions. The L&amp;D community remains the customer the platform is built for.
+          </div>
+        </details>
+
+        <details class="faq-item">
+          <summary>Can my company claim or respond to its profile?</summary>
+          <div class="faq-answer">
+            Yes — eventually. Once we're out of beta, employers will be able to claim their company's profile and add an official statement. They cannot edit or remove individual contributions. This keeps the platform honest and useful while giving companies a voice.
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================== Footer ====================== -->
+  <footer>
+    <div class="container">
+      <a href="/" class="wordmark">
+        <svg class="wordmark-mark" width="20" height="20" viewBox="0 0 56 56" fill="#0F4C4F" aria-hidden="true">
+          <circle cx="28" cy="28" r="7"/>
+          <circle cx="28" cy="12" r="4.5"/>
+          <circle cx="41.86" cy="20" r="4.5"/>
+          <circle cx="41.86" cy="36" r="4.5"/>
+          <circle cx="28" cy="44" r="4.5"/>
+          <circle cx="14.14" cy="36" r="4.5"/>
+          <circle cx="14.14" cy="20" r="4.5"/>
+        </svg>
+        <span>Clari<span class="accent">osity</span></span>
+      </a>
+      <span class="foot-meta">© 2026 · A community for L&amp;D professionals</span>
+      <a href="mailto:hello@clariosity.co" class="foot-link">hello@clariosity.co</a>
+    </div>
+  </footer>
+
+  <script>
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => { if (window.scrollY > 8) nav.classList.add('scrolled'); else nav.classList.remove('scrolled'); });
+  </script>
+
+</body>
+</html>
