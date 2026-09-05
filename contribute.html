@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clariosity — Contribute your profile</title>
-  <meta name="description" content="Share your company's L&D profile and unlock the database. Anonymous at the individual level. Free, takes 5–7 minutes." />
+  <meta name="description" content="Share your company's L&D profile and unlock the database. Anonymous at the individual level. Free, takes about 3 minutes." />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Crect width='56' height='56' rx='12' fill='%230F4C4F'/%3E%3Cg fill='%23FAF8F3'%3E%3Ccircle cx='28' cy='28' r='6.5'/%3E%3Ccircle cx='28' cy='12' r='4'/%3E%3Ccircle cx='41.86' cy='20' r='4'/%3E%3Ccircle cx='41.86' cy='36' r='4'/%3E%3Ccircle cx='28' cy='44' r='4'/%3E%3Ccircle cx='14.14' cy='36' r='4'/%3E%3Ccircle cx='14.14' cy='20' r='4'/%3E%3C/g%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -56,7 +56,7 @@
     h1.page-title em { font-style: italic; color: var(--accent); }
     .page-lede { font-size: 19px; color: var(--text-muted); max-width: 60ch; margin: 0 0 36px; line-height: 1.55; }
 
-    .hero-cta { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; font-family: inherit; font-size: 17px; font-weight: 500; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: 12px; transition: background 0.15s ease, transform 0.05s ease; }
+    .hero-cta { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; font-family: inherit; font-size: 17px; font-weight: 500; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: 12px; transition: background 0.15s ease, transform 0.05s ease; cursor: pointer; }
     .hero-cta:hover { background: var(--accent-hover); text-decoration: none; }
     .hero-cta:active { transform: translateY(1px); }
     .hero-cta svg { flex: 0 0 auto; }
@@ -87,13 +87,14 @@
     .trust-item strong { display: block; color: var(--text); margin-bottom: 4px; font-weight: 600; font-size: 16px; }
     .trust-item span { color: var(--text-muted); font-size: 15px; line-height: 1.55; }
 
-    /* ---------- Primary CTA section ---------- */
+    /* ---------- Primary CTA / form section ---------- */
     section.primary-cta { padding: 72px 0; }
-    .cta-card { max-width: 720px; margin: 0 auto; padding: 48px 40px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-lg); text-align: center; box-shadow: var(--shadow-md); }
-    .cta-card h2 { font-family: 'Source Serif 4', serif; font-weight: 500; font-size: clamp(28px, 3.4vw, 38px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 14px; }
-    .cta-card p { color: var(--text-muted); font-size: 17px; margin: 0 0 28px; }
-    .cta-card .hero-cta { font-size: 18px; padding: 18px 32px; }
-    .cta-secondary { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--border); font-size: 14.5px; color: var(--text-muted); }
+    .cta-card { max-width: 760px; margin: 0 auto; padding: 40px 36px; background: var(--surface); border: 1px solid var(--border-strong); border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
+    .cta-card h2 { font-family: 'Source Serif 4', serif; font-weight: 500; font-size: clamp(28px, 3.4vw, 38px); line-height: 1.15; letter-spacing: -0.02em; margin: 0 0 14px; text-align: center; }
+    .cta-card > p { color: var(--text-muted); font-size: 17px; margin: 0 0 28px; text-align: center; }
+    .form-embed { margin-top: 8px; }
+    .form-embed iframe { width: 100%; border: 0; background: transparent; }
+    .cta-secondary { margin-top: 24px; padding-top: 22px; border-top: 1px solid var(--border); font-size: 14.5px; color: var(--text-muted); text-align: center; }
     .cta-secondary a { font-weight: 500; }
 
     /* ---------- FAQ ---------- */
@@ -130,7 +131,7 @@
         </svg>
         <span>Clari<span class="accent">osity</span></span>
       </a>
-      <a href="/#join" class="nav-cta">Join the waitlist</a>
+      <a href="/#notify" class="nav-cta">Get notified</a>
     </div>
   </nav>
 
@@ -139,12 +140,12 @@
     <div class="container">
       <span class="eyebrow">Contribute your profile</span>
       <h1 class="page-title">Share your profile. Unlock the <em>database</em>.</h1>
-      <p class="page-lede">Contribute your company's L&amp;D profile during Clariosity's early phase. Founding contributors get priority access the moment the platform launches — ahead of the general waitlist. Anonymous at the individual level, named at the company level. Takes 5–7 minutes.</p>
-      <a href="https://tally.so/r/VLvLdj" class="hero-cta" target="_blank" rel="noopener">
+      <p class="page-lede">Contribute your company's L&amp;D profile — no waitlist, you can do it right now. Each company profile goes live once three peers from that company have contributed, and as a contributor you're first to be notified the moment it does. Anonymous at the individual level, named at the company level. Takes about 3 minutes.</p>
+      <a href="#contribute-form" class="hero-cta">
         Contribute your profile
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <p class="hero-meta">Free, 5–7 minutes, anonymous at the individual level.</p>
+      <p class="hero-meta">Free, about 3 minutes, anonymous at the individual level.</p>
     </div>
   </section>
 
@@ -166,10 +167,11 @@
           <ul>
             <li>Company name, industry, headcount band, location</li>
             <li>L&amp;D team size and reporting line</li>
-            <li>Approximate budget per FTE (banded)</li>
-            <li>Top three strategic priorities for the year</li>
+            <li>Approximate L&amp;D spend per employee (banded)</li>
+            <li>Your pay — base and bonus, in bands</li>
+            <li>Your team's top priorities this year</li>
             <li>Vendors and tools used, with satisfaction ratings</li>
-            <li>Optional: salary band, open jobs, culture notes</li>
+            <li>Optional: open roles, culture notes</li>
           </ul>
         </div>
 
@@ -178,7 +180,7 @@
           <h3>What you get</h3>
           <p>Founding contributor status. When Clariosity launches, you receive:</p>
           <ul>
-            <li>Priority access ahead of the general waitlist</li>
+            <li>First to be notified as company profiles go live</li>
             <li>Read access to every contributing company's profile</li>
             <li>Full filter and search — by industry, size, geography, tooling</li>
             <li>Peer benchmarking — see where your function sits</li>
@@ -229,16 +231,15 @@
     </div>
   </section>
 
-  <!-- ====================== Primary CTA ====================== -->
-  <section class="primary-cta">
+  <!-- ====================== Primary CTA + embedded form ====================== -->
+  <section class="primary-cta" id="contribute-form">
     <div class="container">
       <div class="cta-card">
         <h2>Ready to contribute?</h2>
-        <p>Five to seven minutes. You're contributing during Clariosity's early phase — founding contributors receive priority access the moment we launch.</p>
-        <a href="https://tally.so/r/VLvLdj" class="hero-cta" target="_blank" rel="noopener">
-          Contribute your profile
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        </a>
+        <p>About three minutes. You're contributing during Clariosity's early phase — founding contributors get priority access the moment we launch.</p>
+        <div class="form-embed">
+          <iframe data-tally-src="https://tally.so/embed/0Q9QDy?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="640" frameborder="0" marginheight="0" marginwidth="0" title="Contribute your L&amp;D profile"></iframe>
+        </div>
         <div class="cta-secondary">
           Not ready to contribute yet? <a href="https://tally.so/r/KYvedz" target="_blank" rel="noopener">Share quick feedback in our 5-minute survey</a> — helps us shape what we build.
         </div>
@@ -266,14 +267,14 @@
         <details class="faq-item">
           <summary>How do you verify contributions are accurate?</summary>
           <div class="faq-answer">
-            In the early phase, every contribution is reviewed by hand. We verify contributors through a LinkedIn URL (kept private, never published) to confirm the contributor genuinely works at — or has recently worked at — the company they're contributing about. Once we have multiple contributors per company, we cross-reference for consistency.
+            In the early phase, every contribution is reviewed by hand. We verify contributors through the email you provide — and, optionally, a LinkedIn URL — kept private and never published, to confirm you genuinely work at (or recently worked at) the company you're contributing about. Once we have multiple contributors per company, we cross-reference for consistency.
           </div>
         </details>
 
         <details class="faq-item">
           <summary>When will I get access?</summary>
           <div class="faq-answer">
-            Clariosity is currently being built — we're targeting a limited beta in Q3 2026 with broader access by year-end. By contributing now, you become a founding contributor and receive priority access the moment the platform goes live, ahead of the general waitlist. Once live, you'll have an individual account to sign in and browse the database.
+            Clariosity is currently being built — we're targeting a limited beta in Q3 2026 with broader access by year-end. There's no waitlist: you can contribute now, and each company's profile publishes once three peers from that company have contributed. As a founding contributor you're first to be notified as profiles go live, and once the platform is live you'll have an individual account to sign in and browse the database.
           </div>
         </details>
 
@@ -326,6 +327,9 @@
     const nav = document.getElementById('nav');
     window.addEventListener('scroll', () => { if (window.scrollY > 8) nav.classList.add('scrolled'); else nav.classList.remove('scrolled'); });
   </script>
+
+  <!-- Tally embed loader -->
+  <script>var d=document,w="https://tally.so/widgets/embed.js",v=function(){"undefined"!=typeof Tally?Tally.loadEmbeds():d.querySelectorAll("iframe[data-tally-src]:not([src])").forEach(function(e){e.src=e.dataset.tallySrc});};if("undefined"!=typeof Tally)v();else if(null==d.querySelector('script[src="'+w+'"]')){var s=d.createElement("script");s.src=w,s.onload=v,s.onerror=v,d.body.appendChild(s);}</script>
 
 </body>
 </html>
