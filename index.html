@@ -4,31 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clariosity — Clarity from your peers in L&amp;D</title>
-  <meta name="description" content="A peer-driven platform where L&D professionals share what their function is really like — budgets, tools, vendors, priorities, and culture — so others can make better decisions." />
+  <meta name="description" content="Where L&D professionals share the real numbers with each other: budgets, pay, tools, vendors and priorities. Add yours, see everyone else's." />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Crect width='56' height='56' rx='12' fill='%230F4C4F'/%3E%3Cg fill='%23FAF8F3'%3E%3Ccircle cx='28' cy='28' r='6.5'/%3E%3Ccircle cx='28' cy='12' r='4'/%3E%3Ccircle cx='41.86' cy='20' r='4'/%3E%3Ccircle cx='41.86' cy='36' r='4'/%3E%3Ccircle cx='28' cy='44' r='4'/%3E%3Ccircle cx='14.14' cy='36' r='4'/%3E%3Ccircle cx='14.14' cy='20' r='4'/%3E%3C/g%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #FAF8F3;
+      --bg: #FAF6EF;
       --surface: #FFFFFF;
-      --text: #0F172A;
-      --text-muted: #475569;
-      --text-faint: #94A3B8;
+      --text: #262019;
+      --text-muted: #5F564C;
+      --text-faint: #A79E92;
       --accent: #0F4C4F;
       --accent-hover: #134E4A;
-      --accent-soft: #E6F0EF;
-      --accent-tint: #F2F8F7;
-      --border: #E7E5E0;
-      --border-strong: #D6D3CC;
-      --radius: 12px;
-      --radius-lg: 20px;
+      --accent-soft: #E4EFEE;
+      --accent-tint: #F1F8F6;
+      --warm: #C77F4E;
+      --warm-soft: #F6E7DA;
+      --warm-tint: #FBF2EA;
+      --border: #EBE4D8;
+      --border-strong: #DBD2C4;
+      --radius: 16px;
+      --radius-lg: 26px;
       --max-width: 1180px;
       --content-width: 720px;
-      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
-      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.06);
-      --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.08);
+      --shadow-sm: 0 1px 2px rgba(38, 32, 25, 0.04);
+      --shadow-md: 0 10px 30px rgba(38, 32, 25, 0.06);
+      --shadow-lg: 0 24px 56px rgba(38, 32, 25, 0.09);
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -42,23 +45,25 @@
     nav.site-nav { padding: 22px 0; position: sticky; top: 0; background: rgba(250, 248, 243, 0.85); backdrop-filter: saturate(180%) blur(8px); -webkit-backdrop-filter: saturate(180%) blur(8px); z-index: 50; border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
     nav.site-nav.scrolled { border-color: var(--border); }
     nav.site-nav .container { display: flex; align-items: center; justify-content: space-between; }
-    .nav-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--text); padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--surface); transition: all 0.15s ease; }
+    .nav-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--text); padding: 9px 16px; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--surface); transition: all 0.15s ease; }
     .nav-cta:hover { background: var(--accent); color: #fff; border-color: var(--accent); text-decoration: none; }
-    section.hero { padding: 56px 0 72px; }
+    section.hero { padding: 64px 0 92px; }
     .hero-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
     @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; gap: 48px; } }
-    .eyebrow { display: inline-block; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); padding: 6px 12px; background: var(--accent-soft); border-radius: 999px; margin-bottom: 24px; }
+    .eyebrow { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: 0.02em; color: var(--warm); padding: 7px 15px; background: var(--warm-soft); border-radius: 999px; margin-bottom: 24px; }
     h1.hero-title { font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(36px, 5.4vw, 64px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 20px; max-width: 14ch; }
     h1.hero-title em { font-style: italic; color: var(--accent); }
     p.hero-sub { font-size: 19px; line-height: 1.55; color: var(--text-muted); max-width: 50ch; margin: 0 0 32px; }
     .preview-wrap { position: relative; perspective: 1400px; }
-    .preview-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 28px; transform: rotate(0.4deg); transition: transform 0.6s ease; position: relative; overflow: hidden; }
-    .preview-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent) 0%, #4A8C8A 100%); }
-    .preview-wrap:hover .preview-card { transform: rotate(0deg) translateY(-2px); }
+    .preview-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 30px; transition: transform 0.4s ease; position: relative; overflow: hidden; }
+    .preview-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent) 0%, var(--warm) 100%); }
+    .preview-wrap:hover .preview-card { transform: translateY(-3px); }
+    .pc-intro { font-size: 12px; color: var(--text-faint); margin: 0 0 16px; display: flex; align-items: center; gap: 7px; }
+    .pc-intro::before { content: ''; width: 7px; height: 7px; border-radius: 999px; background: #4CAF7D; flex: 0 0 auto; }
     .preview-card .pc-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
     .preview-card .pc-co { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 19px; letter-spacing: -0.01em; color: var(--text); margin: 0 0 4px; }
     .preview-card .pc-meta { font-size: 13px; color: var(--text-muted); }
-    .preview-card .pc-badge { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--accent); background: var(--accent-soft); padding: 4px 9px; border-radius: 999px; flex: 0 0 auto; }
+    .preview-card .pc-badge { font-size: 11px; font-weight: 600; letter-spacing: 0.02em; color: var(--warm); background: var(--warm-soft); padding: 5px 11px; border-radius: 999px; flex: 0 0 auto; }
     .preview-card .pc-section { margin-bottom: 16px; }
     .preview-card .pc-section:last-child { margin-bottom: 0; }
     .preview-card .pc-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin: 0 0 8px; }
@@ -74,7 +79,7 @@
     .signup-form { display: flex; gap: 8px; max-width: 460px; flex-wrap: wrap; }
     .signup-form input[type="email"] { flex: 1; min-width: 220px; padding: 14px 16px; font-family: inherit; font-size: 16px; color: var(--text); background: var(--surface); border: 1px solid var(--border-strong); border-radius: 10px; transition: border-color 0.15s ease, box-shadow 0.15s ease; }
     .signup-form input[type="email"]:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-    .btn-primary { padding: 14px 22px; font-family: inherit; font-size: 16px; font-weight: 500; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: 10px; cursor: pointer; transition: background 0.15s ease, transform 0.05s ease; }
+    .btn-primary { padding: 15px 26px; font-family: inherit; font-size: 16px; font-weight: 600; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: 999px; cursor: pointer; transition: background 0.15s ease, transform 0.05s ease; }
     .btn-primary:hover { background: var(--accent-hover); }
     .btn-primary:active { transform: translateY(1px); }
     .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; }
@@ -83,9 +88,9 @@
     .signup-success.visible { display: block; }
     .signup-error { display: none; margin-top: 16px; padding: 14px 18px; background: #FEF2F2; border: 1px solid #FCA5A5; border-radius: 10px; color: #B91C1C; font-weight: 500; font-size: 14.5px; }
     .signup-error.visible { display: block; }
-    section { padding: 64px 0; }
+    section { padding: 84px 0; }
     section.alt { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    .section-eyebrow { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 14px; display: inline-block; }
+    .section-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.02em; color: var(--warm); margin-bottom: 14px; display: inline-block; }
     h2.section-title { font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(30px, 3.6vw, 44px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 20px; max-width: 22ch; }
     p.section-lede { font-size: 18px; color: var(--text-muted); line-height: 1.6; max-width: 60ch; margin: 0 0 40px; }
     .problem-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
@@ -98,7 +103,7 @@
     @media (max-width: 880px) { .hooks-grid { grid-template-columns: 1fr; } }
     .hook-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
     .hook-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
-    .hook-num { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 16px; margin-bottom: 18px; }
+    .hook-num { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; background: var(--warm-soft); color: var(--warm); font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 16px; margin-bottom: 18px; }
     .hook-card h3 { font-family: 'Source Serif 4', serif; font-weight: 500; font-size: 22px; letter-spacing: -0.01em; line-height: 1.25; margin: 0 0 10px; }
     .hook-card p { color: var(--text-muted); font-size: 15.5px; line-height: 1.55; margin: 0; }
     .how-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; counter-reset: step; }
@@ -141,8 +146,8 @@
     .fade-up.delay-2 { animation-delay: 0.2s; }
     .fade-up.delay-3 { animation-delay: 0.3s; }
     .fade-up.delay-4 { animation-delay: 0.4s; }
-    @keyframes floatCard { 0%, 100% { transform: rotate(0.4deg) translateY(0); } 50% { transform: rotate(0.4deg) translateY(-4px); } }
-    .preview-card { animation: floatCard 5s ease-in-out infinite; }
+    @keyframes floatCard { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+    .preview-card { animation: floatCard 6s ease-in-out infinite; }
   </style>
 </head>
 <body>
@@ -162,7 +167,7 @@
       </div>
       <div style="display:flex; align-items:center; gap:10px;">
         <a href="#notify" class="nav-cta">Get notified</a>
-        <a href="/contribute" class="nav-cta" style="background:var(--accent); color:#fff; border-color:var(--accent);">Contribute your profile</a>
+        <a href="/contribute" class="nav-cta" style="background:var(--accent); color:#fff; border-color:var(--accent);">Share your experience</a>
       </div>
     </div>
   </nav>
@@ -171,23 +176,24 @@
     <div class="container">
       <div class="hero-grid">
         <div>
-          <span class="eyebrow fade-up">For L&amp;D professionals · Now open to contributors</span>
+          <span class="eyebrow fade-up">A community for L&amp;D professionals</span>
           <h1 class="hero-title fade-up delay-1">Clarity from your peers in <em>L&amp;D</em>.</h1>
-          <p class="hero-sub fade-up delay-2">Clariosity is a peer-driven community where L&amp;D professionals share what their function is really like — budgets, tools, vendors, priorities, and culture — so others can make better career, vendor, and strategy decisions. It's built give-to-get: contribute your profile, and you're first in line when company profiles go live.</p>
+          <p class="hero-sub fade-up delay-2">Most of us run L&amp;D half in the dark. What's a normal budget? Is this vendor actually any good? What's the pay like at the company you're interviewing with? Share your experience of your own L&amp;D function, and unlock what your peers shared about theirs.</p>
           <div class="hero-actions fade-up delay-3" style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
-            <a href="/contribute" class="btn-primary" style="text-decoration:none; display:inline-flex; align-items:center;">Contribute your profile →</a>
-            <a href="#notify" class="btn-secondary" style="text-decoration:none; display:inline-flex; align-items:center; padding:14px 20px; border:1px solid var(--border-strong); border-radius:10px; color:var(--text); font-weight:600;">Get notified when profiles go live</a>
+            <a href="/contribute" class="btn-primary" style="text-decoration:none; display:inline-flex; align-items:center;">Share your experience →</a>
+            <a href="#notify" class="btn-secondary" style="text-decoration:none; display:inline-flex; align-items:center; padding:14px 24px; border:1px solid var(--border-strong); border-radius:999px; color:var(--text); font-weight:600;">Get notified when profiles go live</a>
           </div>
-          <p class="signup-meta fade-up delay-3" style="margin-top:16px;">Takes about 3 minutes. Anonymous at the individual level — always.</p>
+          <p class="signup-meta fade-up delay-3" style="margin-top:16px;">Takes about 3 minutes. Your answers are anonymous.</p>
         </div>
         <div class="preview-wrap fade-up delay-4">
           <div class="preview-card" aria-hidden="true">
+            <p class="pc-intro">Example profile</p>
             <div class="pc-head">
               <div>
                 <p class="pc-co">Northwind Software</p>
                 <p class="pc-meta">Tech / SaaS · 1,000–5,000 employees · United Kingdom</p>
               </div>
-              <span class="pc-badge">5 contributors</span>
+              <span class="pc-badge">5 peers shared</span>
             </div>
             <div class="pc-section">
               <p class="pc-label">L&amp;D function</p>
@@ -219,9 +225,9 @@
     <div class="container">
       <div class="problem-grid">
         <div>
-          <span class="section-eyebrow">The problem</span>
-          <h2 class="section-title">L&amp;D operates blind — and that's by accident, not design.</h2>
-          <p style="color: var(--text-muted); margin: 0;">Career, vendor, and budget decisions get made on hunches because the peer data is locked in private DMs, expensive industry reports, and the heads of the people doing the job. Every L&amp;D pro ends up reinventing the same answers in isolation.</p>
+          <span class="section-eyebrow">Why it exists</span>
+          <h2 class="section-title">Everyone's working out the same things alone.</h2>
+          <p style="color: var(--text-muted); margin: 0;">The answers are out there. They're just stuck in DMs, expensive reports, and other people's heads, so everyone ends up figuring them out on their own. Clariosity pools what L&amp;D professionals already know, so you don't have to start from scratch every time.</p>
         </div>
         <div class="problem-points">
           <div class="problem-point"><strong>Career decisions on hunches</strong><span>What's the L&amp;D function actually like? You find out three months in.</span></div>
@@ -236,13 +242,13 @@
     <div class="container">
       <div style="max-width: 720px;">
         <span class="section-eyebrow">What you get</span>
-        <h2 class="section-title">Three things you can't get anywhere else.</h2>
-        <p class="section-lede">The data L&amp;D pros most want — about each other — pulled together for the first time.</p>
+        <h2 class="section-title">The stuff no vendor or report will tell you.</h2>
+        <p class="section-lede">It comes from other L&amp;D professionals being straight with you, not from a sales team or a survey.</p>
       </div>
       <div class="hooks-grid">
-        <article class="hook-card"><span class="hook-num">01</span><h3>Job-search insight</h3><p>Interviewing for an L&amp;D role? See what the function is really like before you take the offer — team size, budget, priorities, current stack, culture.</p></article>
-        <article class="hook-card"><span class="hook-num">02</span><h3>Anonymized peer benchmarking</h3><p>Where do you sit vs. similar companies? Budget per employee, team structure, reporting line, tooling — all banded, all compared to peers your size.</p></article>
-        <article class="hook-card"><span class="hook-num">03</span><h3>Vendor reality check</h3><p>What LMSes, LXPs, coaching platforms, and content libraries are companies like yours actually using? What do they pay? Are they happy? Real ratings from real users.</p></article>
+        <article class="hook-card"><span class="hook-num">01</span><h3>A real look before you take the job</h3><p>Interviewing somewhere? See what the L&amp;D function is actually like before you say yes: team size, budget, priorities, the tools, the culture.</p></article>
+        <article class="hook-card"><span class="hook-num">02</span><h3>Know where you stand</h3><p>Wondering if your budget or team size is normal? Compare yourself against companies like yours and stop guessing.</p></article>
+        <article class="hook-card"><span class="hook-num">03</span><h3>The truth about the tools</h3><p>Which platforms people actually use, what they pay, and whether they'd buy again. Straight from the people using them, not the sales deck.</p></article>
       </div>
     </div>
   </section>
@@ -251,13 +257,13 @@
     <div class="container">
       <div style="max-width: 720px;">
         <span class="section-eyebrow">How it works</span>
-        <h2 class="section-title">Give to get. No waitlist — start now.</h2>
-        <p class="section-lede">Anonymous at the individual level. Named at the company level. Sensitive data is shown in bands, and a company's profile only publishes once enough peers have contributed.</p>
+        <h2 class="section-title">Share yours, see everyone else's.</h2>
+        <p class="section-lede">You stay anonymous. A company's profile opens up once a few people from it have shared, so there's always enough there to compare against.</p>
       </div>
       <div class="how-grid">
-        <div class="how-step"><h4>1 · Contribute your profile</h4><p>One structured form, about 3 minutes — team size, budget band, priorities, and the vendors you use with satisfaction scores. No waitlist: you can do it right now.</p></div>
-        <div class="how-step"><h4>2 · Profiles publish at 3 contributions</h4><p>When a company reaches three independent contributions, its anonymized, banded profile goes live. The threshold is what protects anonymity — no one can be singled out.</p></div>
-        <div class="how-step"><h4>3 · Get notified the moment they go live</h4><p>As a contributor you're first to know when a company profile publishes — including your own. That's how the community grows: real data, unlocked as peers add theirs.</p></div>
+        <div class="how-step"><h4>1 · Add your profile</h4><p>One short form, about 3 minutes. Team size, budget, priorities, and the tools you use with a quick rating. No waitlist, no sign-up wall.</p></div>
+        <div class="how-step"><h4>2 · Profiles open at three</h4><p>Once three people from a company have shared, its profile goes live for everyone. That's what keeps it useful and fair.</p></div>
+        <div class="how-step"><h4>3 · We let you know</h4><p>You'll hear as soon as profiles go live, your own company included. The more people add theirs, the better it gets for everyone.</p></div>
       </div>
     </div>
   </section>
@@ -265,8 +271,8 @@
   <section>
     <div class="container">
       <div style="text-align: center; margin-bottom: 40px;">
-        <span class="section-eyebrow">Who joins Clariosity</span>
-        <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Built for the people doing the job.</h2>
+        <span class="section-eyebrow">Who's here</span>
+        <h2 class="section-title" style="margin-left: auto; margin-right: auto;">For everyone working in L&amp;D.</h2>
       </div>
       <div class="audience-grid">
         <div class="audience-pill">L&amp;D leaders<em>Heads, Directors, CLOs</em></div>
@@ -284,12 +290,12 @@
         <h2 class="section-title" style="margin-left: auto; margin-right: auto;">Things people are asking.</h2>
       </div>
       <div class="faq-list">
-        <details class="faq-item"><summary>Who can join Clariosity?</summary><div class="faq-answer">Any L&amp;D professional — leaders, managers, specialists, instructional designers, consultants, freelancers. We're starting with strongest density in the US and UK, but anyone in L&amp;D anywhere is welcome.</div></details>
-        <details class="faq-item"><summary>What do I share, and who sees it?</summary><div class="faq-answer">You'll fill out a structured profile of your company's L&amp;D function: team size, budget band, top priorities, the tools and vendors you use with satisfaction ratings. Anyone else who's contributed can read your profile alongside every other contributing company. No one ever sees who contributed any individual entry.</div></details>
-        <details class="faq-item"><summary>How is anonymity protected?</summary><div class="faq-answer">Contributors are anonymous at the individual level — your name is never tied to a profile. Companies are named, but sensitive data (specific budget figures, salaries) is shown in bands, and only after multiple peers from a company have contributed. Single-contributor companies show only structural information.</div></details>
-        <details class="faq-item"><summary>What does it cost?</summary><div class="faq-answer">Free to contribute and read for active members. Long-term, paid tiers will be aimed at recruiters and vendors who want deeper access — never at the L&amp;D community itself. Contributors keep free access by refreshing their profile annually.</div></details>
-        <details class="faq-item"><summary>What if my company hasn't given me permission to share?</summary><div class="faq-answer">The data we collect is non-confidential information that doesn't typically require explicit authorization — functional structure, vendor names in use, broad budget ranges, public-facing priorities. If you're unsure about anything specific, share what you're comfortable with. Partial profiles are welcome.</div></details>
-        <details class="faq-item"><summary>Can I contribute now — and when can I see other profiles?</summary><div class="faq-answer">Yes, contributing is open today — there's no waitlist. Each company profile goes live once three people from that company have contributed, which keeps everyone anonymous. Contributors are first to be notified as profiles publish, and get access as the database opens up through 2026. The more peers contribute, the faster it fills in.</div></details>
+        <details class="faq-item"><summary>Who can join?</summary><div class="faq-answer">Anyone who works in L&amp;D: leaders, managers, specialists, instructional designers, consultants and freelancers. We're starting out strongest in the US and UK, but everyone's welcome.</div></details>
+        <details class="faq-item"><summary>What do I share, and who sees it?</summary><div class="faq-answer">A short profile of your company's L&amp;D function: team size, budget, priorities, and the tools you use with a quick rating. Anyone else who's shared can see it, alongside every other company. Your name is never attached to it.</div></details>
+        <details class="faq-item"><summary>Am I anonymous?</summary><div class="faq-answer">Yes. Your name is never tied to what you share. Companies are named, but pay and budgets only ever show as ranges, and only once a few people from a company have added theirs.</div></details>
+        <details class="faq-item"><summary>What does it cost?</summary><div class="faq-answer">Free to share and free to read. Later on, paid tiers will be for recruiters and vendors who want more, never for the L&amp;D community itself.</div></details>
+        <details class="faq-item"><summary>What if I'm not sure I can share this?</summary><div class="faq-answer">What we ask for isn't confidential: broad structure, the tools you use, rough budget ranges, general priorities. Share what you're comfortable with. Partial profiles are welcome.</div></details>
+        <details class="faq-item"><summary>Can I do it now, and when do I see other profiles?</summary><div class="faq-answer">Yes, you can share right now. A company's profile opens up once three people from it have added theirs, and you'll be first to know when it does. It fills out fast once people get going.</div></details>
       </div>
     </div>
   </section>
@@ -297,10 +303,10 @@
   <section class="final-cta" id="notify">
     <div class="container">
       <div class="final-card">
-        <h2>The best way in is to contribute.</h2>
-        <p>Contributors are first to be notified as company profiles go live — and first to get access. Not ready to fill out the full profile yet? Drop your email and we'll notify you the moment profiles start publishing.</p>
+        <h2>Share your experience, unlock your peers'.</h2>
+        <p>It only works because people go first. Share your experience (about 3 minutes) and you'll be among the first to see profiles as they open up. Not ready yet? Leave your email and we'll let you know when profiles start going live.</p>
         <div style="margin-bottom:28px;">
-          <a href="/contribute" class="btn-primary" style="text-decoration:none; display:inline-flex; align-items:center;">Contribute your profile →</a>
+          <a href="/contribute" class="btn-primary" style="text-decoration:none; display:inline-flex; align-items:center;">Share your experience →</a>
         </div>
         <p style="font-weight:600; margin-bottom:12px;">Or just get notified when profiles go live:</p>
         <form class="signup-form" id="cta-form" action="https://formspree.io/f/mwvyqbre" method="POST" novalidate style="max-width: 100%; display: block;">
@@ -313,13 +319,13 @@
           <div class="filter-question">
             <label class="q">Which would pull you in most? <span style="color: var(--text-faint); font-weight: 400;">(optional, helps us prioritise)</span></label>
             <div class="filter-options">
-              <label><input type="radio" name="hook" value="jobs" /><span><strong>Job-search insight</strong> — see what L&amp;D is really like at companies I'm interviewing with.</span></label>
-              <label><input type="radio" name="hook" value="benchmarking" /><span><strong>Peer benchmarking</strong> — where my function sits vs. similar companies.</span></label>
-              <label><input type="radio" name="hook" value="vendors" /><span><strong>Vendor reality check</strong> — what peers actually use, pay, and rate.</span></label>
+              <label><input type="radio" name="hook" value="jobs" /><span><strong>Job-hunting.</strong> What L&amp;D is really like at companies I'm interviewing with.</span></label>
+              <label><input type="radio" name="hook" value="benchmarking" /><span><strong>Benchmarking.</strong> Where my team sits next to similar companies.</span></label>
+              <label><input type="radio" name="hook" value="vendors" /><span><strong>The tools.</strong> What people actually use, pay, and rate.</span></label>
             </div>
           </div>
         </form>
-        <div class="signup-success" id="cta-success" style="margin-top: 20px;">Thanks — you're on the notify list. We'll email you as profiles go live.</div>
+        <div class="signup-success" id="cta-success" style="margin-top: 20px;">Thanks, you're on the list. We'll email you as profiles go live.</div>
         <div class="signup-error" id="cta-error" style="margin-top: 20px;"></div>
       </div>
     </div>

@@ -4,31 +4,34 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Clariosity — Contribute your profile</title>
-  <meta name="description" content="Share your company's L&D profile and unlock the database. Anonymous at the individual level. Free, takes about 3 minutes." />
+  <meta name="description" content="Share what your company's L&D function is really like, and see what your peers shared back. Anonymous as a person. Free, about 3 minutes." />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Crect width='56' height='56' rx='12' fill='%230F4C4F'/%3E%3Cg fill='%23FAF8F3'%3E%3Ccircle cx='28' cy='28' r='6.5'/%3E%3Ccircle cx='28' cy='12' r='4'/%3E%3Ccircle cx='41.86' cy='20' r='4'/%3E%3Ccircle cx='41.86' cy='36' r='4'/%3E%3Ccircle cx='28' cy='44' r='4'/%3E%3Ccircle cx='14.14' cy='36' r='4'/%3E%3Ccircle cx='14.14' cy='20' r='4'/%3E%3C/g%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --bg: #FAF8F3;
+      --bg: #FAF6EF;
       --surface: #FFFFFF;
-      --text: #0F172A;
-      --text-muted: #475569;
-      --text-faint: #94A3B8;
+      --text: #262019;
+      --text-muted: #5F564C;
+      --text-faint: #A79E92;
       --accent: #0F4C4F;
       --accent-hover: #134E4A;
-      --accent-soft: #E6F0EF;
-      --accent-tint: #F2F8F7;
-      --border: #E7E5E0;
-      --border-strong: #D6D3CC;
-      --radius: 12px;
-      --radius-lg: 20px;
+      --accent-soft: #E4EFEE;
+      --accent-tint: #F1F8F6;
+      --warm: #C77F4E;
+      --warm-soft: #F6E7DA;
+      --warm-tint: #FBF2EA;
+      --border: #EBE4D8;
+      --border-strong: #DBD2C4;
+      --radius: 16px;
+      --radius-lg: 26px;
       --max-width: 1180px;
       --content-width: 720px;
-      --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
-      --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.06);
-      --shadow-lg: 0 20px 48px rgba(15, 23, 42, 0.08);
+      --shadow-sm: 0 1px 2px rgba(38, 32, 25, 0.04);
+      --shadow-md: 0 10px 30px rgba(38, 32, 25, 0.06);
+      --shadow-lg: 0 24px 56px rgba(38, 32, 25, 0.09);
     }
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
@@ -46,17 +49,17 @@
     nav.site-nav { padding: 22px 0; position: sticky; top: 0; background: rgba(250, 248, 243, 0.92); backdrop-filter: saturate(180%) blur(8px); -webkit-backdrop-filter: saturate(180%) blur(8px); z-index: 50; border-bottom: 1px solid transparent; transition: border-color 0.2s ease; }
     nav.site-nav.scrolled { border-color: var(--border); }
     nav.site-nav .container { display: flex; align-items: center; justify-content: space-between; }
-    .nav-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--text); padding: 8px 14px; border-radius: 8px; border: 1px solid var(--border-strong); background: var(--surface); transition: all 0.15s ease; }
+    .nav-cta { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; font-weight: 500; color: var(--text); padding: 9px 16px; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--surface); transition: all 0.15s ease; }
     .nav-cta:hover { background: var(--accent); color: #fff; border-color: var(--accent); text-decoration: none; }
 
     /* ---------- Page header ---------- */
     .page-header { padding: 56px 0 32px; }
-    .eyebrow { display: inline-block; font-size: 13px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); padding: 6px 12px; background: var(--accent-soft); border-radius: 999px; margin-bottom: 22px; }
+    .eyebrow { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: 0.02em; color: var(--warm); padding: 7px 15px; background: var(--warm-soft); border-radius: 999px; margin-bottom: 22px; }
     h1.page-title { font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(36px, 5.2vw, 60px); line-height: 1.05; letter-spacing: -0.025em; margin: 0 0 18px; max-width: 16ch; }
     h1.page-title em { font-style: italic; color: var(--accent); }
     .page-lede { font-size: 19px; color: var(--text-muted); max-width: 60ch; margin: 0 0 36px; line-height: 1.55; }
 
-    .hero-cta { display: inline-flex; align-items: center; gap: 10px; padding: 16px 28px; font-family: inherit; font-size: 17px; font-weight: 500; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: 12px; transition: background 0.15s ease, transform 0.05s ease; cursor: pointer; }
+    .hero-cta { display: inline-flex; align-items: center; gap: 10px; padding: 16px 30px; font-family: inherit; font-size: 17px; font-weight: 600; color: #fff; background: var(--accent); border: 1px solid var(--accent); border-radius: 999px; transition: background 0.15s ease, transform 0.05s ease; cursor: pointer; }
     .hero-cta:hover { background: var(--accent-hover); text-decoration: none; }
     .hero-cta:active { transform: translateY(1px); }
     .hero-cta svg { flex: 0 0 auto; }
@@ -64,8 +67,8 @@
 
     /* ---------- Steps section ---------- */
     section.alt { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
-    section { padding: 64px 0; }
-    .section-eyebrow { font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 14px; display: inline-block; }
+    section { padding: 84px 0; }
+    .section-eyebrow { font-size: 13px; font-weight: 600; letter-spacing: 0.02em; color: var(--warm); margin-bottom: 14px; display: inline-block; }
     h2.section-title { font-family: 'Source Serif 4', Georgia, serif; font-weight: 500; font-size: clamp(30px, 3.6vw, 42px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 20px; max-width: 22ch; }
     p.section-lede { font-size: 18px; color: var(--text-muted); line-height: 1.55; max-width: 60ch; margin: 0 0 40px; }
 
@@ -73,7 +76,7 @@
     @media (max-width: 880px) { .steps-grid { grid-template-columns: 1fr; } }
     .step-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px; transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease; }
     .step-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: var(--border-strong); }
-    .step-num { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 8px; background: var(--accent-soft); color: var(--accent); font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 15px; margin-bottom: 18px; }
+    .step-num { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 999px; background: var(--warm-soft); color: var(--warm); font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 15px; margin-bottom: 18px; }
     .step-card h3 { font-family: 'Source Serif 4', serif; font-weight: 500; font-size: 22px; letter-spacing: -0.01em; line-height: 1.25; margin: 0 0 10px; }
     .step-card p { color: var(--text-muted); font-size: 15.5px; line-height: 1.55; margin: 0 0 14px; }
     .step-card ul { margin: 0; padding: 0; list-style: none; }
@@ -138,14 +141,14 @@
   <!-- ====================== Header ====================== -->
   <section class="page-header">
     <div class="container">
-      <span class="eyebrow">Contribute your profile</span>
-      <h1 class="page-title">Share your profile. Unlock the <em>database</em>.</h1>
-      <p class="page-lede">Contribute your company's L&amp;D profile — no waitlist, you can do it right now. Each company profile goes live once three peers from that company have contributed, and as a contributor you're first to be notified the moment it does. Anonymous at the individual level, named at the company level. Takes about 3 minutes.</p>
+      <span class="eyebrow">Add your profile</span>
+      <h1 class="page-title">Share your experience. Unlock your peers' <em>insights</em>.</h1>
+      <p class="page-lede">Tell us what your company's L&amp;D function is really like: the numbers, the tools, the reality of it. Once three people from a company have shared, that profile opens up for everyone, and you'll be first to know. Takes about 3 minutes, and your answers are anonymous.</p>
       <a href="#contribute-form" class="hero-cta">
-        Contribute your profile
+        Share your experience
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </a>
-      <p class="hero-meta">Free, about 3 minutes, anonymous at the individual level.</p>
+      <p class="hero-meta">Free, and takes about 3 minutes.</p>
     </div>
   </section>
 
@@ -153,22 +156,22 @@
   <section class="alt">
     <div class="container">
       <div style="max-width: 720px;">
-        <span class="section-eyebrow">How the give-to-get works</span>
-        <h2 class="section-title">Give once. Gain access for the year.</h2>
-        <p class="section-lede">A simple exchange: peer-contributed data only stays peer-contributed if everyone in the community gives a little. Here's what that looks like in practice.</p>
+        <span class="section-eyebrow">How it works</span>
+        <h2 class="section-title">Share your experience, get everyone else's.</h2>
+        <p class="section-lede">It only works because people go first. You share what your world's really like, and you get everyone else's back. Here's what that means in practice.</p>
       </div>
 
       <div class="steps-grid">
 
         <div class="step-card">
           <span class="step-num">01</span>
-          <h3>What you give</h3>
-          <p>One structured profile of your company's L&amp;D function. Fields include:</p>
+          <h3>What you share</h3>
+          <p>One short profile of your company's L&amp;D function. Fields include:</p>
           <ul>
             <li>Company name, industry, headcount band, location</li>
             <li>L&amp;D team size and reporting line</li>
             <li>Approximate L&amp;D spend per employee (banded)</li>
-            <li>Your pay — base and bonus, in bands</li>
+            <li>Your pay as bands (base and bonus)</li>
             <li>Your team's top priorities this year</li>
             <li>Vendors and tools used, with satisfaction ratings</li>
             <li>Optional: open roles, culture notes</li>
@@ -180,11 +183,11 @@
           <h3>What you get</h3>
           <p>Founding contributor status. When Clariosity launches, you receive:</p>
           <ul>
-            <li>First to be notified as company profiles go live</li>
-            <li>Read access to every contributing company's profile</li>
-            <li>Full filter and search — by industry, size, geography, tooling</li>
-            <li>Peer benchmarking — see where your function sits</li>
-            <li>Vendor satisfaction ratings, in aggregate</li>
+            <li>First to know as company profiles go live</li>
+            <li>See every other company's profile</li>
+            <li>Search and filter by industry, size, location and tools</li>
+            <li>See how you compare to companies like yours</li>
+            <li>Honest vendor ratings, across the board</li>
           </ul>
         </div>
 
@@ -195,9 +198,8 @@
           <ul>
             <li>You'll receive an individual account tied to your contributor email</li>
             <li>Refresh your profile annually to keep access</li>
-            <li>Changed jobs? Submit a new profile for your new company</li>
-            <li>Withdraw your contribution any time</li>
-            <li>No paid tiers for individual L&amp;D pros — ever</li>
+            <li>Changed jobs? Add a profile for your new company</li>
+            <li>Always free for L&amp;D professionals. No paid tiers, ever</li>
           </ul>
         </div>
 
@@ -208,25 +210,10 @@
   <!-- ====================== Trust / Anonymity ====================== -->
   <section>
     <div class="container">
-      <div style="max-width: 720px;">
-        <span class="section-eyebrow">Anonymity &amp; trust</span>
-        <h2 class="section-title">Your contribution is protected.</h2>
-        <p class="section-lede">The anonymity model is the central design decision of Clariosity. Three things you should know:</p>
-      </div>
-
-      <div class="trust-grid">
-        <div class="trust-item">
-          <strong>Anonymous at the individual level</strong>
-          <span>Your name is never tied to any profile you submit. We verify contributors privately to maintain data quality, but no one else ever sees who contributed an individual entry.</span>
-        </div>
-        <div class="trust-item">
-          <strong>Sensitive data shown in bands</strong>
-          <span>Specific salary figures, exact budgets, and similar fields appear only as ranges. And only once multiple peers from the same company have contributed — single-contributor companies show only structural information.</span>
-        </div>
-        <div class="trust-item">
-          <strong>You stay in control</strong>
-          <span>Withdraw your contribution at any time and we'll remove it within 7 days. Update your profile whenever your function changes. No data is sold. No data is shared with third parties without your explicit consent.</span>
-        </div>
+      <div style="max-width: 640px;">
+        <span class="section-eyebrow">On anonymity</span>
+        <h2 class="section-title">Be honest. That's the whole point.</h2>
+        <p class="section-lede">Your name is never attached to anything you share, and pay and budgets only ever show as ranges. Everyone can be straight with each other because no one's left exposed.</p>
       </div>
     </div>
   </section>
@@ -235,13 +222,13 @@
   <section class="primary-cta" id="contribute-form">
     <div class="container">
       <div class="cta-card">
-        <h2>Ready to contribute?</h2>
-        <p>About three minutes. You're contributing during Clariosity's early phase — founding contributors get priority access the moment we launch.</p>
+        <h2>Ready to share yours?</h2>
+        <p>About three minutes. Share now and you'll be among the first to see profiles as they open up.</p>
         <div class="form-embed">
           <iframe data-tally-src="https://tally.so/embed/0Q9QDy?alignLeft=1&hideTitle=1&transparentBackground=1&dynamicHeight=1" loading="lazy" width="100%" height="640" frameborder="0" marginheight="0" marginwidth="0" title="Contribute your L&amp;D profile"></iframe>
         </div>
         <div class="cta-secondary">
-          Not ready to contribute yet? <a href="https://tally.so/r/KYvedz" target="_blank" rel="noopener">Share quick feedback in our 5-minute survey</a> — helps us shape what we build.
+          Not ready to share yet? <a href="https://tally.so/r/KYvedz" target="_blank" rel="noopener">Tell us what you'd want from it</a> in a quick survey.
         </div>
       </div>
     </div>
@@ -260,42 +247,42 @@
         <details class="faq-item">
           <summary>What if my company hasn't given me permission to share?</summary>
           <div class="faq-answer">
-            The data we collect is non-confidential information that doesn't typically require explicit authorization — functional structure, vendor names in use, broad budget ranges, public-facing priorities. If you're unsure about anything specific, share what you're comfortable with. Partial profiles are welcome and still valuable.
+            None of what we ask for is confidential: broad structure, the tools you use, rough budget ranges, general priorities. If you're unsure about anything, just share what you're comfortable with. Partial profiles are welcome and still useful.
           </div>
         </details>
 
         <details class="faq-item">
           <summary>How do you verify contributions are accurate?</summary>
           <div class="faq-answer">
-            In the early phase, every contribution is reviewed by hand. We verify contributors through the email you provide — and, optionally, a LinkedIn URL — kept private and never published, to confirm you genuinely work at (or recently worked at) the company you're contributing about. Once we have multiple contributors per company, we cross-reference for consistency.
+            Early on, we check each one by hand. We use the email you give us (and your LinkedIn, if you add it) to confirm you actually work, or worked, where you say. Neither is ever published. Once a few people have shared about the same company, we cross-check for consistency.
           </div>
         </details>
 
         <details class="faq-item">
           <summary>When will I get access?</summary>
           <div class="faq-answer">
-            Clariosity is currently being built — we're targeting a limited beta in Q3 2026 with broader access by year-end. There's no waitlist: you can contribute now, and each company's profile publishes once three peers from that company have contributed. As a founding contributor you're first to be notified as profiles go live, and once the platform is live you'll have an individual account to sign in and browse the database.
+            Clariosity is being built now, with a limited beta in Q3 2026 and wider access by the end of the year. You can share right now. A company's profile opens up once three people from it have shared, and as an early contributor you'll be first to know when profiles go live. Once it's live you'll have your own login to browse everyone else's.
           </div>
         </details>
 
         <details class="faq-item">
           <summary>What happens if I leave my company?</summary>
           <div class="faq-answer">
-            Your existing contribution stays in the database (it represents your company's L&amp;D function at the time you contributed). When you start at a new company, you're welcome to submit a new profile for the new company to keep your access fresh. Or you can withdraw your existing contribution at any time and we'll remove it within 7 days.
+            It stays as a snapshot of that company at the time you shared it. When you move, you're welcome to add a profile for your new company. And if you'd rather pull the old one, just ask and we'll take it down.
           </div>
         </details>
 
         <details class="faq-item">
-          <summary>Will my contribution ever be sold?</summary>
+          <summary>How will Clariosity make money?</summary>
           <div class="faq-answer">
-            No. Individual contributions are never sold to third parties. Long-term, Clariosity will offer paid tiers to recruiters and L&amp;D vendors for access to aggregated, anonymised insights — never raw individual contributions. The L&amp;D community remains the customer the platform is built for.
+            Not from selling your data. Later on there'll be paid tiers for recruiters and vendors who want aggregated, anonymised insights, never individual contributions. The L&amp;D community is who it's built for, and always free for them.
           </div>
         </details>
 
         <details class="faq-item">
           <summary>Can my company claim or respond to its profile?</summary>
           <div class="faq-answer">
-            Yes — eventually. Once we're out of beta, employers will be able to claim their company's profile and add an official statement. They cannot edit or remove individual contributions. This keeps the platform honest and useful while giving companies a voice.
+            Eventually, yes. After beta, companies will be able to claim their profile and add an official response. They won't be able to edit or remove what people shared, so it stays honest.
           </div>
         </details>
 
