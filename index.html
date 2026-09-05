@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Clariosity — Clarity from your peers in L&amp;D</title>
+  <title>Clariosity — How does your L&amp;D function compare?</title>
   <meta name="description" content="Where L&D professionals share the real numbers with each other: budgets, pay, tools, vendors and priorities. Add yours, see everyone else's." />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 56 56'%3E%3Crect width='56' height='56' rx='12' fill='%230F4C4F'/%3E%3Cg fill='%23FAF8F3'%3E%3Ccircle cx='28' cy='28' r='6.5'/%3E%3Ccircle cx='28' cy='12' r='4'/%3E%3Ccircle cx='41.86' cy='20' r='4'/%3E%3Ccircle cx='41.86' cy='36' r='4'/%3E%3Ccircle cx='28' cy='44' r='4'/%3E%3Ccircle cx='14.14' cy='36' r='4'/%3E%3Ccircle cx='14.14' cy='20' r='4'/%3E%3C/g%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -55,6 +55,7 @@
     .preview-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); padding: 28px; transform: rotate(0.4deg); transition: transform 0.6s ease; position: relative; overflow: hidden; }
     .preview-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, var(--accent) 0%, #4A8C8A 100%); }
     .preview-wrap:hover .preview-card { transform: rotate(0deg) translateY(-2px); }
+    .preview-card .pc-intro { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-faint); margin: 0 0 14px; }
     .preview-card .pc-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1px solid var(--border); }
     .preview-card .pc-co { font-family: 'Source Serif 4', serif; font-weight: 600; font-size: 19px; letter-spacing: -0.01em; color: var(--text); margin: 0 0 4px; }
     .preview-card .pc-meta { font-size: 13px; color: var(--text-muted); }
@@ -172,8 +173,8 @@
       <div class="hero-grid">
         <div>
           <span class="eyebrow fade-up">A community for L&amp;D professionals</span>
-          <h1 class="hero-title fade-up delay-1">Clarity from your peers in <em>L&amp;D</em>.</h1>
-          <p class="hero-sub fade-up delay-2">Most of us run L&amp;D half in the dark. What's a normal budget? Is this vendor actually any good? What's the pay like at the company you're interviewing with? Share your experience of your own L&amp;D function, and unlock what your peers shared about theirs.</p>
+          <h1 class="hero-title fade-up delay-1">How does your <em>L&amp;D</em> function compare?</h1>
+          <p class="hero-sub fade-up delay-2">Is your team understaffed? Is your budget low? What should you be paid? And if you're looking for your next role, is it a company where L&amp;D is actually valued? Share your experience and see how you compare to L&amp;D professionals like you.</p>
           <div class="hero-actions fade-up delay-3" style="display:flex; flex-wrap:wrap; gap:12px; align-items:center;">
             <a href="/contribute" class="btn-primary" style="text-decoration:none; display:inline-flex; align-items:center;">Share your experience →</a>
             <a href="#notify" class="btn-secondary" style="text-decoration:none; display:inline-flex; align-items:center; padding:14px 22px; border:1px solid var(--border-strong); border-radius:10px; color:var(--text); font-weight:500;">Get notified when profiles go live</a>
@@ -182,18 +183,19 @@
         </div>
         <div class="preview-wrap fade-up delay-4">
           <div class="preview-card" aria-hidden="true">
+            <p class="pc-intro">Example profile · demonstration data</p>
             <div class="pc-head">
               <div>
                 <p class="pc-co">Northwind Software</p>
-                <p class="pc-meta">Tech / SaaS · 1,000–5,000 employees · United Kingdom</p>
+                <p class="pc-meta">Tech / SaaS · 1,000–5,000 employees · United States</p>
               </div>
               <span class="pc-badge">5 peers shared</span>
             </div>
             <div class="pc-section">
               <p class="pc-label">L&amp;D function</p>
-              <div class="pc-stat-row"><span>Team size</span><span>12 (1 : 850)</span></div>
+              <div class="pc-stat-row"><span>Team size</span><span>12 (1 : 250)</span></div>
               <div class="pc-stat-row"><span>Reports to</span><span>Chief People Officer</span></div>
-              <div class="pc-stat-row"><span>Budget per employee</span><span>£400 – £500</span></div>
+              <div class="pc-stat-row"><span>Budget per employee</span><span>$500 – $650</span></div>
             </div>
             <div class="pc-section">
               <p class="pc-label">Top priorities, 2026</p>
@@ -240,9 +242,9 @@
         <p class="section-lede">It comes from other L&amp;D professionals being straight with you, not from a sales team or a survey.</p>
       </div>
       <div class="hooks-grid">
-        <article class="hook-card"><span class="hook-num">01</span><h3>A real look before you take the job</h3><p>Interviewing somewhere? See what the L&amp;D function is actually like before you say yes: team size, budget, priorities, the tools, the culture.</p></article>
-        <article class="hook-card"><span class="hook-num">02</span><h3>Know where you stand</h3><p>Wondering if your budget or team size is normal? Compare yourself against companies like yours and stop guessing.</p></article>
-        <article class="hook-card"><span class="hook-num">03</span><h3>The truth about the tools</h3><p>Which platforms people actually use, what they pay, and whether they'd buy again. Straight from the people using them, not the sales deck.</p></article>
+        <article class="hook-card"><span class="hook-num">01</span><h3>Know where you stand</h3><p>Wondering if your budget, team size or pay is normal? See where you sit against L&amp;D professionals at companies like yours, and stop guessing.</p></article>
+        <article class="hook-card"><span class="hook-num">02</span><h3>A real look before you take the job</h3><p>Interviewing somewhere? See whether L&amp;D is actually valued there before you say yes: team size, budget, leadership support, the tools, the culture.</p></article>
+        <article class="hook-card"><span class="hook-num">03</span><h3>The truth about the tools</h3><p>Which platforms people actually use and whether they'd recommend them. Straight from the people using them, not the sales deck.</p></article>
       </div>
     </div>
   </section>
@@ -288,7 +290,7 @@
         <details class="faq-item"><summary>What do I share, and who sees it?</summary><div class="faq-answer">A short profile of your company's L&amp;D function: team size, budget, priorities, and the tools you use with a quick rating. Anyone else who's shared can see it, alongside every other company. Your name is never attached to it.</div></details>
         <details class="faq-item"><summary>Am I anonymous?</summary><div class="faq-answer">Yes. Your name is never tied to what you share. Companies are named, but pay and budgets only ever show as ranges, and only once a few people from a company have added theirs.</div></details>
         <details class="faq-item"><summary>What does it cost?</summary><div class="faq-answer">Free to share and free to read. Later on, paid tiers will be for recruiters and vendors who want more, never for the L&amp;D community itself.</div></details>
-        <details class="faq-item"><summary>What if I'm not sure I can share this?</summary><div class="faq-answer">What we ask for isn't confidential: broad structure, the tools you use, rough budget ranges, general priorities. Share what you're comfortable with. Partial profiles are welcome.</div></details>
+        <details class="faq-item"><summary>What if I'm not sure I can share this?</summary><div class="faq-answer">Only share what you're comfortable and authorized to share, and leave out anything confidential, personal or commercially sensitive. Pay and budgets are collected as ranges and only shown once there are enough contributions to keep them anonymous. Partial profiles are welcome.</div></details>
         <details class="faq-item"><summary>Can I do it now, and when do I see other profiles?</summary><div class="faq-answer">Yes, you can share right now. A company's profile opens up once three people from it have added theirs, and you'll be first to know when it does. It fills out fast once people get going.</div></details>
       </div>
     </div>
@@ -311,7 +313,7 @@
             <button type="submit" class="btn-primary">Notify me</button>
           </div>
           <div class="filter-question">
-            <label class="q">Which would pull you in most? <span style="color: var(--text-faint); font-weight: 400;">(optional, helps us prioritise)</span></label>
+            <label class="q">Which would pull you in most? <span style="color: var(--text-faint); font-weight: 400;">(optional, helps us prioritize)</span></label>
             <div class="filter-options">
               <label><input type="radio" name="hook" value="jobs" /><span><strong>Job-hunting.</strong> What L&amp;D is really like at companies I'm interviewing with.</span></label>
               <label><input type="radio" name="hook" value="benchmarking" /><span><strong>Benchmarking.</strong> Where my team sits next to similar companies.</span></label>
